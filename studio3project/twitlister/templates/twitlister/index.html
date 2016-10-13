@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+{% if latest_twit_list %}
+    {% for texto in latest_twit_list %}
+        <form action="">
+        <div><input type="checkbox" name="caixinha" value="piru">{{ texto.texto }}</input></div>
+        </form>
+    {% endfor %}
+{% else %}
+    <p>ERROR.</p>
+{% endif %}
