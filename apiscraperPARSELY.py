@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-Test use of Twitter API for scraping #2
+PARSE.LY API SCRAPER
 
 """
 import urllib2
@@ -10,7 +10,7 @@ import json
 import psycopg2
 from pprint import pprint
 
-#autenticar oath
+#oath authentication (((old twitter scraper remnants)))
 # def oauth_req(url,key,secret,http_method="GET",post_body="", http_headers=None):
 # 	consumer = oauth2.Consumer(key='n2DCTtvbYs9Y7ItMu6TGdfIaI',secret='eDx3gC0Fyn873DAI3muGJqG7yV6GGyWvjDtBu4WEnxZblv8Zzf')
 # 	token = oauth2.Token(key='291881212-ZbHxjlwr88tKZkxraLY4UXlvv1xDYuSPdosOIdCY',secret='BKCRNm4OKUXTxn304BUcddnF7n9BsrsmcD6Nq5ivXDEud')
@@ -18,15 +18,17 @@ from pprint import pprint
 # 	resp,content = client.request(url,method=http_method,body=post_body,headers=http_headers )
 # 	return content
 
-#acertando API calls para 24 e 48h 
+#Make API calls for top 5 posts in the last 24h and 48h 
 umdia = 'http://api.parsely.com/v2/realtime/posts?apikey=blog.parsely.com&time=24h&limit=5'
 doisdia = 'http://api.parsely.com/v2/realtime/posts?apikey=blog.parsely.com&time=48h&limit=5'
 
-#capturar dados do dia 1
+#capture 24h stats
 response1 = urllib2.urlopen(umdia)
 dados = json.load(response1)['data']
 
-#criar listalimpa com apenas os dados que nos precisaremos
+#create clean list out of 24h data with only the things we need
+#this was done to be able to compare lists as "Hits" field would yield different results
+#thus making comparison impossible
 listalimpa = []
 i=0
 while i<len(dados):
@@ -43,7 +45,7 @@ while i<len(dados):
 	listalimpa.append([title , tags , pubdate , link, thumb, author])
 	i=i+1
 
-#mesma coisa porem para 2 dias
+#repeat for 48h stats
 response2 = urllib2.urlopen(doisdia)
 dados2 = json.load(response2)['data']
 
@@ -63,7 +65,7 @@ while i<len(dados2):
 	listalimpa2.append([title , tags , pubdate , link, thumb, author])
 	i=i+1
 
-#limpar lista dos elementos que nao estiverem nas duas
+#compare lists and return only posts that were present in both 24h and 48h calls
 def equal_ignore_order(listalimpa, listalimpa2):
     unmatched = list(listalimpa2)
     for element in listalimpa:
@@ -73,17 +75,18 @@ def equal_ignore_order(listalimpa, listalimpa2):
             return False
     return not unmatched
 
-#printar lista final 
+#print final list
 #pprint(listalimpa2)
-#conectar a db
+
+#connect to db
 conn = psycopg2.connect(database="djangotest", user="igorcarrasco")
 cur = conn.cursor()
 
-#criar tabela teste
-cur.execute("CREATE TABLE IF NOT EXISTS tabelateste (id serial PRIMARY KEY, title varchar, tags varchar, pubdate varchar, link varchar, thumb varchar, author varchar);")
+#create test table "tabelateste"
+#cur.execute("CREATE TABLE IF NOT EXISTS tabelateste (id serial PRIMARY KEY, title varchar, tags varchar, pubdate varchar, link varchar, thumb varchar, author varchar);")
 
-#escrever os valores 'text' (texto do twit) e 'id' (id do twit) para cada elemento da lista datafinal (variable i) 
-#nos campos tweetid e data
+#write to the database title, tag list, published date, link, thumbnail url, author
+#in the corresponding fields
 i=0
 while i<len(listalimpa2):
 	title=listalimpa2[i][0]
@@ -92,14 +95,14 @@ while i<len(listalimpa2):
 	link=listalimpa2[i][3]
 	thumb=listalimpa2[i][4]
 	author=listalimpa2[i][5]
-	cur.execute("INSERT INTO tabelateste (title, tags, pubdate, link, thumb, author) VALUES (%s,%s,%s,%s,%s,%s )",(title,tags,pubdate,link,thumb,author))
+	cur.execute("INSERT INTO Elly (title, tags, pubdate, link, thumb, author) VALUES (%s,%s,%s,%s,%s,%s )",(title,tags,pubdate,link,thumb,author))
 	i=i+1
 
-#gravar
+#commit
 conn.commit()
 
 #recuperar todos os dados da table
-cur.execute("SELECT * FROM tabelateste;")
+cur.execute("SELECT * FROM Elly;")
 
 #selecionar todos os dados da table testando
 rows = cur.fetchall()
@@ -108,8 +111,9 @@ rows = cur.fetchall()
 for row in rows:
 	print row
 
-#fechar cursor
+#close cursor and connection with db
 cur.close()
-#fechar conexao com db
 conn.close()
+
+#it worked!
 print "SUCESS"
