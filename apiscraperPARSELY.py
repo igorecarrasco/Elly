@@ -31,10 +31,16 @@ listalimpa = []
 i=0
 while i<len(dados):
 	title=dados[i]['title']
-	tags=dados[i]['tags']
+	tags=[]
+	a=0
+	while a<len(dados[i]['tags']): 
+		tags.append(dados[i]['tags'][a])
+		a=a+1
 	pubdate=dados[i]['pub_date']
 	link=dados[i]['link']
-	listalimpa.append([title , tags , pubdate , link])
+	thumb=dados[i]['thumb_url_medium']
+	author=dados[i]['author']
+	listalimpa.append([title , tags , pubdate , link, thumb, author])
 	i=i+1
 
 #mesma coisa porem para 2 dias
@@ -43,12 +49,18 @@ dados2 = json.load(response2)['data']
 
 listalimpa2 = []
 i=0
-while i<len(dados):
+while i<len(dados2):
 	title=dados2[i]['title']
-	tags=dados2[i]['tags']
+	tags=[]
+	a=0
+	while a<len(dados2[i]['tags']): 
+		tags.append(dados2[i]['tags'][a])
+		a=a+1
 	pubdate=dados2[i]['pub_date']
 	link=dados2[i]['link']
-	listalimpa2.append([title , tags , pubdate , link])
+	thumb=dados2[i]['thumb_url_medium']
+	author=dados2[i]['author']
+	listalimpa2.append([title , tags , pubdate , link, thumb, author])
 	i=i+1
 
 #limpar lista dos elementos que nao estiverem nas duas
@@ -62,31 +74,32 @@ def equal_ignore_order(listalimpa, listalimpa2):
     return not unmatched
 
 #printar lista final 
-pprint(listalimpa2)
-
-"""
-
+#pprint(listalimpa2)
 #conectar a db
 conn = psycopg2.connect(database="djangotest", user="igorcarrasco")
 cur = conn.cursor()
 
 #criar tabela teste
-#cur.execute("CREATE TABLE IF NOT EXISTS djangotest (id serial PRIMARY KEY, twitid varchar, texto varchar);")
+cur.execute("CREATE TABLE IF NOT EXISTS tabelateste (id serial PRIMARY KEY, title varchar, tags varchar, pubdate varchar, link varchar, thumb varchar, author varchar);")
 
 #escrever os valores 'text' (texto do twit) e 'id' (id do twit) para cada elemento da lista datafinal (variable i) 
 #nos campos tweetid e data
 i=0
-while i<len(datafinal):
-	texto=datafinal[i]['text']
-	numbero=datafinal[i]['id']
-	cur.execute("INSERT INTO twitlister_tweet (twitid, texto) VALUES (%s,%s)",(json.dumps(numbero),json.dumps(texto)))
+while i<len(listalimpa2):
+	title=listalimpa2[i][0]
+	tags=listalimpa2[i][1]
+	pubdate=listalimpa2[i][2]
+	link=listalimpa2[i][3]
+	thumb=listalimpa2[i][4]
+	author=listalimpa2[i][5]
+	cur.execute("INSERT INTO tabelateste (title, tags, pubdate, link, thumb, author) VALUES (%s,%s,%s,%s,%s,%s )",(title,tags,pubdate,link,thumb,author))
 	i=i+1
 
 #gravar
 conn.commit()
 
 #recuperar todos os dados da table
-cur.execute("SELECT * FROM twitlister_tweet;")
+cur.execute("SELECT * FROM tabelateste;")
 
 #selecionar todos os dados da table testando
 rows = cur.fetchall()
@@ -98,6 +111,5 @@ for row in rows:
 #fechar cursor
 cur.close()
 #fechar conexao com db
-conn.close() 
-"""
+conn.close()
 print "SUCESS"
