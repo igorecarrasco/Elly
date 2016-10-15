@@ -18,5 +18,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^twitlister/', include('twitlister.urls')),
+    url(r'^elly/', include('elly.urls')),
     url(r'^admin/', admin.site.urls),
 ]
