@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'twitlister.apps.TwitlisterConfig',
+    'elly.apps.EllyConfig',
 ]
 
 MIDDLEWARE = [
@@ -77,9 +78,10 @@ WSGI_APPLICATION = 'studio3project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'djangotest',
+        'NAME': 'EllyDB',
         'USER': 'igorcarrasco',
-        'HOST': '127.0.0.1',
+        'PASSWORD': 'swordfish',
+        'HOST': 'elly.cbmuo4tsduau.us-west-2.rds.amazonaws.com',
         'PORT': '5432',
     }
 }

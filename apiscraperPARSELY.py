@@ -79,11 +79,11 @@ def equal_ignore_order(listalimpa, listalimpa2):
 #pprint(listalimpa2)
 
 #connect to db
-conn = psycopg2.connect(database="djangotest", user="igorcarrasco")
+conn = psycopg2.connect(database="EllyDB", user="igorcarrasco", password="swordfish", host="elly.cbmuo4tsduau.us-west-2.rds.amazonaws.com")
 cur = conn.cursor()
 
 #create test table "tabelateste"
-#cur.execute("CREATE TABLE IF NOT EXISTS tabelateste (id serial PRIMARY KEY, title varchar, tags varchar, pubdate varchar, link varchar, thumb varchar, author varchar);")
+#cur.execute("CREATE TABLE IF NOT EXISTS elly_elly (id serial PRIMARY KEY, title varchar, tags varchar, pubdate varchar, link varchar, thumb varchar, author varchar);")
 
 #write to the database title, tag list, published date, link, thumbnail url, author
 #in the corresponding fields
@@ -95,14 +95,14 @@ while i<len(listalimpa2):
 	link=listalimpa2[i][3]
 	thumb=listalimpa2[i][4]
 	author=listalimpa2[i][5]
-	cur.execute("INSERT INTO Elly (title, tags, pubdate, link, thumb, author) VALUES (%s,%s,%s,%s,%s,%s )",(title,tags,pubdate,link,thumb,author))
+	cur.execute("INSERT INTO elly_elly (title, tags, pubdate, link, thumb, author) VALUES (%s,%s,%s,%s,%s,%s )",(title,tags,pubdate,link,thumb,author))
 	i=i+1
 
 #commit
 conn.commit()
 
 #recuperar todos os dados da table
-cur.execute("SELECT * FROM Elly;")
+cur.execute("SELECT * FROM elly_elly;")
 
 #selecionar todos os dados da table testando
 rows = cur.fetchall()

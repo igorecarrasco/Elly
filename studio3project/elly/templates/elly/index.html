@@ -1,0 +1,19 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+{% load static %}
+		<link rel="stylesheet" type="text/css" href="/static/elly/style.css" />
+		<link rel="icon" href="/static/elly/favicon.png">
+	</head>
+	<body>
+{% if elly_list %}
+    {% for title in elly_list %}
+	    <form action="">
+	    <div class=piromba><input type="checkbox" name="caixinha" value="piru"><a href= {{ title.link }} target="_Blank">{{ title.title }}</a> {{ title.author }}</input></div>
+	    </form>
+	    <p>PEROMBA</p>
+    {% endfor %}
+{% else %}
+    <p>ERROR.</p>
+{% endif %}
+	</body>
