@@ -4,16 +4,28 @@
 {% load static %}
 		<link rel="stylesheet" type="text/css" href= {% static "elly/style.css" %}/>
 		<link rel="icon" href= {% static "elly/favicon.png" %}>
+		<title> Elly Beta 1.0</title>
+		<meta charset="UTF-8">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond" rel="stylesheet">
 	</head>
 	<body>
+	<div class=header>Elly</div>
+	<div class=ellylogo><img width=150px src= {% static "elly/ellylogo.png" %}></img></div>
 {% if elly_list %}
     {% for title in elly_list %}
 	    <form action="">
-	    <div class=piromba><input type="checkbox" name="caixinha" value="piru"><a href= {{ title.link }} target="_Blank">{{ title.title }}</a> {{ title.author }}</input></div>
+	    <div class=ellybox>
+	    <input type="checkbox" name="caixinha" value="story">
+	    	<img width=85px src='{{ title.thumb }}'/>
+	    	<a href= {{ title.link }} target="_Blank">{{ title.title }}</a> 
+	    	<em>by {{ title.author }}</em>
+	    </input>
+	    </div>
 	    </form>
-	    <p>PEROMBA</p>
     {% endfor %}
+    	<input class=submitbox type="submit" value="Submit">
 {% else %}
-    <p>ERROR.</p>
+    <p class=error>Error: Database empty!</p>
 {% endif %}
 	</body>

@@ -1,9 +1,59 @@
-.piromba {
-	color:green;
+.ellybox {
+	position:relative;
+	top:40px;
+  width:94%;
+  height:100%;
+  left: 20px;
+  margin-top:10px;
+  font-family: sans-serif;
+  font-size:15px;
+  font-weight:300;
 }
-
+.ellybox img {
+	margin-right:10px;
+}
+.ellybox:span {
+	bottom:15px;
+}
+.ellybox a:visited {
+	color:#aaa;
+}
+.ellybox a:link,a:active{
+	color:#222;
+}
+.header {
+	font-family: "Cormorant Garamond",serif;
+	font-size: 40px;
+	color:white;
+	text-align: center;
+	width:100%;
+	position: relative;
+	background-color: black;
+	height: 50px;
+	top:30px;
+	padding-bottom:2px;
+	margin-bottom:50px;
+}
+.ellylogo {
+	position:absolute;
+	top:10px;
+	left:20px;
+}
+.error {
+	margin-left:20px;
+	margin-top:100px;
+}
 p {
+	color: #222;
 }
 body {
-	background-color:black;
+	background-color:#eee;
+	margin:0;
+	padding:0;
+}
+.submitbox {
+	position:relative;
+	top:15px;
+	margin: 3% 3% 0% 3%;
+	background-color:#aaa;
 }
