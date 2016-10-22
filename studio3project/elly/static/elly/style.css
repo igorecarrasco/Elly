@@ -16,17 +16,20 @@
   align-items: center;
 }
 .title {
-	width:300px;
+	width:280px;
 	font-size:15px;
+	margin:0px 10px 0px 10px;
 
 }
 .author {
-	width:130px;
+	width:120px;
+	margin:0px 10px 0px 10px;
 	font-size:14px;
 
 }
 .views {
 	width:90px;
+	margin: 0px 10px 0px 10px;
 	font-size:14px;
 	text-align: center;
 }
