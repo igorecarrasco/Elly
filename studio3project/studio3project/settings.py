@@ -12,10 +12,22 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 from os.path import join, dirname
-from dotenv import load_dotenv
+from dotenv import load_dotenv,find_dotenv
 
-dotenv_path = join(dirname(__file__), '.env')
-load_dotenv(dotenv_path)
+# get variables from ENV file
+BUILDENV = os.getenv('BUILD',False)
+#skip if using servo environment (already has the variables)
+if BUILDENV != 'servo':
+
+    if BUILDENV != False:
+        # custom alt .env file inside this direct e.g .envDJ
+        dotenv_path = join(dirname(__file__), BUILDENV)
+        load_dotenv(dotenv_path)
+    else:
+        # main .env file located 2 directories up
+        dotenv_path = join(dirname(__file__), "../..", ".env")
+        load_dotenv(dotenv_path)
+        
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +37,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'f1e$dv5qp48x$s)zp2^*ue6gyvz090%9n_cnuvrko_4c&&p$3d'
+SECRET_KEY = os.getenv('saltkey')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
