@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+from os.path import join, dirname
+from dotenv import load_dotenv
+
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -75,14 +80,20 @@ WSGI_APPLICATION = 'studio3project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
+db = os.getenv('db')
+dbuser = os.getenv('dbuser')
+dbpassword = os.getenv('dbpassword')
+dbhost = os.getenv('dbhost')
+dbport = os.getenv('dbport')
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'EllyDB',
-        'USER': 'igorcarrasco',
-        'PASSWORD': 'swordfish',
-        'HOST': 'elly.cbmuo4tsduau.us-west-2.rds.amazonaws.com',
-        'PORT': '5432',
+        'NAME': db,
+        'USER': dbuser,
+        'PASSWORD': dbpassword,
+        'HOST': dbhost,
+        'PORT': dbport,
     }
 }
 
