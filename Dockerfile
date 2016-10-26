@@ -35,10 +35,6 @@ RUN easy_install pip
 # install uwsgi now because it takes a little while
 RUN pip install uwsgi
 
-# setup all the configfiles
-RUN echo "daemon off;" >> /etc/nginx/nginx.conf
-COPY nginx-app.conf /etc/nginx/sites-available/default
-COPY supervisor-app.conf /etc/supervisor/conf.d/
 
 # COPY requirements.txt and RUN pip install BEFORE adding the rest of your code, this will cause Docker's caching mechanism
 # to prevent re-installinig (all your) dependencies when you made a change a line or two in your app. 
@@ -53,6 +49,12 @@ COPY . /home/docker/code/
 RUN mkdir /home/docker/code/studio3project/static
 RUN mkdir /home/docker/code/studio3project/studio3project/static
 RUN python /home/docker/code/studio3project/manage.py collectstatic --noinput
+
+# setup all the configfiles
+RUN echo "daemon off;" >> /etc/nginx/nginx.conf
+COPY nginx-app.conf /etc/nginx/sites-available/default
+COPY supervisor-app.conf /etc/supervisor/conf.d/
+
 
 EXPOSE 80
 CMD ["supervisord","-n"]
