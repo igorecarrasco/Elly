@@ -2,6 +2,26 @@
 
 This is a testing platform for webapp tool Elly, my final project for studio 20.
 
+### Sample .env file
+
+Create .env file in root directory with the following key/values. Ask Igor for details.
+
+	dbport=5432
+	db=DBHERE
+	dbuser=abc
+	dbpassword=pass
+	dbhost=hosturl
+	saltkey=djangosalt
+	parselytoken=parsleytokenhere
+	parselyapikey=apikeyhere
+
+
+## Run Locally
+
+### requirements
+
+ - install python, pip, virtualenv
+
 ### Turn on Virtualenv
 
 	cd /DJANGO
