@@ -29,19 +29,40 @@ Create .env file in root directory with the following key/values. Ask Igor for d
 
 This source command turns on virtual environment to encapsulate python libraries.
 
-### Turn off venv
-
-	deactivate
-
 
 ### Install python requirements
 
 	sudo pip install -r requirements.txt
 
-### update python requirements
+### if you need to update python requirements
 
 	# install the library
 	pip install something
 
 	# freeze to requirements
 	pip freeze > requirements.txt
+
+
+## Getting Django DB set up
+
+	cd /studio3project 
+	python manage.py migrate
+
+## Run python ellyscraper
+
+	cd ../ellyscraper/
+	python ellyscraper.py
+
+Once scraper is finished, data will be loaded into database
+
+## Run Django 
+
+	cd ../studio3project
+	python manage.py runserver 
+
+Visit <http://localhost:8000/elly>
+
+
+### Turn off venv (optional)
+
+	deactivate
