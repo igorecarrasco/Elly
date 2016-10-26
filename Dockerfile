@@ -36,7 +36,7 @@ RUN easy_install pip
 RUN pip install uwsgi
 
 # setup all the configfiles
-RUN echo "!!daemon off;" >> /etc/nginx/nginx.conf
+RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 COPY nginx-app.conf /etc/nginx/sites-available/default
 COPY supervisor-app.conf /etc/supervisor/conf.d/
 
@@ -50,6 +50,7 @@ RUN pip install -r /home/docker/code/studio3project/requirements.txt
 COPY . /home/docker/code/
 
 # RUN python /home/docker/code/studio3project/manage.py migrate --noinput
+RUN mkdir /home/docker/code/studio3project/studio3project/static
 RUN python /home/docker/code/studio3project/manage.py collectstatic --noinput
 
 EXPOSE 80

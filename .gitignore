@@ -1,3 +1,4 @@
-*.pyc
 .env
 /venv
+studio3project/static/*
+*.pyc
