@@ -46,7 +46,10 @@ RUN pip install -r /home/docker/code/studio3project/requirements.txt
 COPY . /home/docker/code/
 
 # RUN python /home/docker/code/studio3project/manage.py migrate --noinput
+RUN rm -rf /home/docker/code/studio3project/static
 RUN mkdir /home/docker/code/studio3project/static
+
+RUN rm -rf /home/docker/code/studio3project/studio3project/static
 RUN mkdir /home/docker/code/studio3project/studio3project/static
 RUN python /home/docker/code/studio3project/manage.py collectstatic --noinput
 
