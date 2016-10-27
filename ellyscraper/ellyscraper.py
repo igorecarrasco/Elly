@@ -98,8 +98,6 @@ for element in novalista:
 	hits = json.load(resposta)['data'][0]['visitors']
 	element.append(hits)
 
-
-
 #create test table "tabelateste"
 #cur.execute("CREATE TABLE IF NOT EXISTS elly_elly (id serial PRIMARY KEY, title varchar, tags varchar, pubdate varchar, link varchar, thumb varchar, author varchar);")
 
@@ -115,6 +113,11 @@ while i<len(novalista):
 	author=novalista[i][5]
 	section=novalista[i][6]
 	views=novalista[i][7]
+	replace=["u'","'","[","]"]
+	for a in replace:
+		tags=str(tags).replace(a,"")
+		author=str(author).replace(a,"")
+	author=author.replace("\u2019","'")
 	cur.execute("INSERT INTO elly_elly (title, tags, pubdate, link, thumb, author, section, views) VALUES (%s,%s,%s,%s,%s,%s,%s,%s )",(title,tags,pubdate,link,thumb,author,section,views))
 	i=i+1
 
