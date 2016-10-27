@@ -113,7 +113,7 @@ while i<len(novalista):
 	author=novalista[i][5]
 	section=novalista[i][6]
 	views=novalista[i][7]
-	replace=["u'","'","[","]"]
+	replace=["u'","'","[","]",'"']
 	for a in replace:
 		tags=str(tags).replace(a,"")
 		author=str(author).replace(a,"")
