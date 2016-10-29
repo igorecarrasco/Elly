@@ -141,13 +141,12 @@ while i<len(novalista):
 	thumb=novalista[i][4]
 	author=novalista[i][5]
 	section=novalista[i][6]
-	views=novalista[i][7]
 	replace=["u'","'","[","]",'"']
 	for a in replace:
 		tags=str(tags).replace(a,"")
 		author=str(author).replace(a,"")
 	author=author.replace("\u2019","'")
-	cur.execute("INSERT INTO elly_elly (title, tags, pubdate, link, thumb, author, section, views) VALUES (%s,%s,%s,%s,%s,%s,%s,%s )",(title,tags,pubdate,link,thumb,author,section,views))
+	cur.execute("INSERT INTO elly_elly (title, tags, pubdate, link, thumb, author, section) VALUES (%s,%s,%s,%s,%s,%s,%s)",(title,tags,pubdate,link,thumb,author,section))
 	i=i+1
 
 cur.execute("DELETE FROM elly_elly WHERE id NOT IN (SELECT min(id) FROM elly_elly GROUP BY link)")
