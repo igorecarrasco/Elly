@@ -120,12 +120,13 @@ for element in listalimpa:
 			novalista.append(element)
 
 #api call for page views 
+"""
 for element in novalista:
 	url = "http://api.parsely.com/v2/analytics/post/detail?apikey="+apikey+"&secret="+token+"&url="+element[3]
 	resposta = urllib2.urlopen(url)
 	hits = json.load(resposta)['data'][0]['visitors']
 	element.append(hits)
-
+"""
 #create test table "tabelateste"
 #cur.execute("CREATE TABLE IF NOT EXISTS elly_elly (id serial PRIMARY KEY, title varchar, tags varchar, pubdate varchar, link varchar, thumb varchar, author varchar);")
 
@@ -153,16 +154,6 @@ cur.execute("DELETE FROM elly_elly WHERE id NOT IN (SELECT min(id) FROM elly_ell
 
 #commit
 conn.commit()
-
-#recuperar todos os dados da table
-cur.execute("SELECT * FROM elly_elly;")
-
-#selecionar todos os dados da table testando
-rows = cur.fetchall()
-
-#imprimir o q tem na db
-for row in rows:
-	print row
 
 #close cursor and connection with db
 cur.close()
