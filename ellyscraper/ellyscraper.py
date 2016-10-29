@@ -31,10 +31,12 @@ cur = conn.cursor()
 #Make API calls for top 20 posts in the last 24h and 48h 
 umdia = 'http://api.parsely.com/v2/analytics/posts?apikey='+apikey+'&secret='+token+'&days=1&limit=15'
 doisdia = 'http://api.parsely.com/v2/analytics/posts?apikey='+apikey+'&secret='+token+'&days=2&limit=15'
+tresdia = 'http://api.parsely.com/v2/analytics/posts?apikey='+apikey+'&secret='+token+'&days=3&limit=15'
+
 
 #capture 24h stats
-response1 = urllib2.urlopen(umdia)
-dados = json.load(response1)['data']
+response = urllib2.urlopen(umdia)
+dados = json.load(response)['data']
 
 #create clean list out of 24h data with only the things we need
 #this was done to be able to compare lists as "Hits" field would yield different results
@@ -61,35 +63,61 @@ while i<len(dados):
 	i=i+1
 
 #repeat for 48h stats
-response2 = urllib2.urlopen(doisdia)
-dados2 = json.load(response2)['data']
+response = urllib2.urlopen(doisdia)
+dados = json.load(response)['data']
 
 listalimpa2 = []
 i=0
-while i<len(dados2):
-	title=dados2[i]['title']
+while i<len(dados):
+	title=dados[i]['title']
 	tags=[]
 	a=0
-	while a<len(dados2[i]['tags']): 
-		tags.append(dados2[i]['tags'][a])
+	while a<len(dados[i]['tags']): 
+		tags.append(dados[i]['tags'][a])
 		a=a+1
-	pubdate=dados2[i]['pub_date']
-	link=dados2[i]['link']
-	thumb=dados2[i]['image_url']
+	pubdate=dados[i]['pub_date']
+	link=dados[i]['link']
+	thumb=dados[i]['image_url']
 	authors=[]
 	b=0
-	while b<len(dados2[i]['authors']): 
-		authors.append(dados2[i]['authors'][b])
+	while b<len(dados[i]['authors']): 
+		authors.append(dados[i]['authors'][b])
 		b=b+1
-	section=dados2[i]['section']
+	section=dados[i]['section']
 	listalimpa2.append([title , tags , pubdate , link, thumb, authors, section])
+	i=i+1
+
+#repeat for 72h stats
+response = urllib2.urlopen(tresdia)
+dados = json.load(response)['data']
+
+listalimpa3 = []
+i=0
+while i<len(dados):
+	title=dados[i]['title']
+	tags=[]
+	a=0
+	while a<len(dados[i]['tags']): 
+		tags.append(dados[i]['tags'][a])
+		a=a+1
+	pubdate=dados[i]['pub_date']
+	link=dados[i]['link']
+	thumb=dados[i]['image_url']
+	authors=[]
+	b=0
+	while b<len(dados[i]['authors']): 
+		authors.append(dados[i]['authors'][b])
+		b=b+1
+	section=dados[i]['section']
+	listalimpa3.append([title , tags , pubdate , link, thumb, authors, section])
 	i=i+1
 
 #compare lists and return only posts that were present in both 24h and 48h calls
 novalista =[]
 for element in listalimpa:
 	if element in listalimpa2:
-		novalista.append(element)
+		if element in listalimpa3:
+			novalista.append(element)
 
 #api call for page views 
 for element in novalista:
