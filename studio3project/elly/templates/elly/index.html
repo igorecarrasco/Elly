@@ -10,26 +10,16 @@
 		<link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond" rel="stylesheet">
 	</head>
 	<body>
-	<div class=header>Elly</div>
-	<div class=ellylogo><img width=150px src= {% static "elly/ellylogo.png" %}></img></div>
-{% if elly_list %}
-	<ul>
-    {% for title in elly_list %}
-	    <li>
-	    <form action="">
-	    <div class=ellybox>
-	    <input type="checkbox" name="box" value="{{ title.id }}">
-	    	<div class=thumbimg><img width=85px height=55px src='{{ title.thumb }}'/></div>
-	    	<span class=title><a href='{{ title.link }}' target="_Blank">{{ title.title }}</a></span>
-	    	<span class=author><em>by {{ title.author }}</em></span> <span class=views><p>Hits:<strong> {{title.views}}</strong></p></span>
-	    </input>
-	    </div>
-	    </form>
-	    </li>
-    {% endfor %}
-    </ul>
-    	<input class=submitbox type="submit" value="Submit">
-{% else %}
-    <p class=error>Error: Database empty!</p>
-{% endif %}
+		<div class=header>Elly</div>
+		<div class=ellylogo>
+			<img width=150px src= {% static "elly/ellylogo.png" %}></img>
+		</div>
+		<ul>
+			{% if elly_list %}
+				{% include "elly/contentlist.html" %}
+			{% else %}
+		    	<p class=error>Error: Database empty!</p>
+		    {% endif %}
+		</ul>
 	</body>
+</html>

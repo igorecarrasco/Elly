@@ -1,0 +1,14 @@
+{% for title in elly_list %}
+	    <li>
+	    <form action="">
+	    <div class=ellybox>
+	    <input type="checkbox" name="box" value="{{ title.id }}">
+	    	<div class=thumbimg><img width=85px height=55px src='{{ title.thumb }}'/></div>
+	    	<span class=title><a href='{{ title.link }}' target="_Blank">{{ title.title }}</a></span>
+	    	<span class=author><em>by {{ title.author }}</em></span> <span class=views><p>Hits:<strong> {{title.views}}</strong></p></span>
+	    </input>
+	    </div>
+	    </form>
+	    </li>
+{% endfor %}
+    	<input class=submitbox type="submit" value="Submit">
