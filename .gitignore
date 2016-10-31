@@ -3,3 +3,5 @@
 /venv
 
 *.pyc
+
+studio3project/elly/static/elly/hits.js
