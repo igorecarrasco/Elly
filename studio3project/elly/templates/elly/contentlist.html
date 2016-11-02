@@ -1,4 +1,8 @@
+<form action="/elly/rssfeed" method="get">
 {% for id in elly_list %}
 	{% include "elly/contentelement.html" %}
 {% endfor %}
-    	<input class=submitbox type="submit" value="Submit">
+    <input class=submitbox type="submit" value="OK">
+}
+</form>
+<h1>{{ form }}</h1>

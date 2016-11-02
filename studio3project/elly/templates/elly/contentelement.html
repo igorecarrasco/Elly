@@ -1,27 +1,24 @@
 <head>
-{% load static %}
 </head>
 <body>
 	<li>
-		<form action="">
-			<div class=ellybox>
-				<input type="checkbox" name="box" value="{{ id.id }}">
-					<div class=thumbimg>
-						<img width=85px height=55px src='{{ id.thumb }}'/>
-					</div>
-					<span class=title>
-						<a href='{{ id.link }}' target="_Blank" id="link">{{ id.title }}</a>
-					</span>
-					<span class=author>
-						<em>by {{ id.author }}</em>
-					</span> 
-					<span class=stats>
-						<p>Hits:<strong id=hits> {{ hits }}</strong></p>
-						<p>Likes:<strong id=likes> </strong></p>
-						<p>RTs:<strong id=rts> </strong></p>
-					</span>
-				</input>
-			</div>
-		</form>
+		<div class=ellybox>
+			<input id="postid" type="checkbox" name="postid" value="{{ id.id }}">
+				<div class=thumbimg>
+					<img width=85px height=55px src='{{ id.thumb }}'/>
+				</div>
+				<span class=title>
+					<a href='{{ id.link }}' target="_Blank" id="link">{{ id.title }}</a>
+				</span>
+				<span class=author>
+					<em>by {{ id.author }}</em>
+				</span> 
+				<span class=stats>
+					<p>Hits:<strong id=hits> </strong></p>
+					<p>Likes:<strong id=likes> </strong></p>
+					<p>RTs:<strong id=rts> </strong></p>
+				</span>
+			</input>
+		</div>
 	</li>
 </body>
