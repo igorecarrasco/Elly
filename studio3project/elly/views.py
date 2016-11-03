@@ -21,14 +21,14 @@ import re
 # apikey= os.getenv('parselyapikey')
 
 def index(request):
-	elly_list = Elly.objects.order_by('id')
+	elly_list = Elly.objects.order_by('-id')
 	template = loader.get_template('elly/index.html')
 	context = {'elly_list': elly_list,}
 	return HttpResponse(template.render(context,request))
 
 def rssfeed(request):
   if request.method == "GET":
-  	f=open('elly/static/elly/rssfeed.rss','w')
+  	f=open('elly/rssfeed.rss','w')
   	f.write('<?xml version="1.0" encoding="UTF-8"?><rss xmlns:wsj="http://dowjones.net/rss/" xmlns:dj="http://dowjones.net/rss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Social Headlines for Methode Articles</title><link>http://online.wsj.com/page/2_0062.html</link><atom:link type="application/rss+xml" rel="self" href="http://online.wsj.com/page/2_0062.html"/><description>Social Headlines for Methode Articles</description><language>en-us</language><pubDate>Wed, 02 Nov 2016 18:19:52 -0400</pubDate><lastBuildDate>Wed, 02 Nov 2016 18:19:52 -0400</lastBuildDate><copyright>Dow Jones &amp; Company, Inc.</copyright><generator>http://online.wsj.com/page/2_0062.html</generator><docs>http://cyber.law.harvard.edu/rss/rss.html</docs><image><title>Social Headlines for Methode Articles</title><link>http://online.wsj.com/page/2_0062.html</link><url>http://online.wsj.com/img/wsj_sm_logo.gif</url></image>')
 	postids = request.GET.getlist('postid','')
 	for element in postids:
