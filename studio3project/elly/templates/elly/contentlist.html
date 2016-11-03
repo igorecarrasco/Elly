@@ -1,4 +1,5 @@
-<form action="/elly/rssfeed" method="get">
+<form action="/elly/rssfeed" method="post">
+	{% csrf_token %}
 {% for id in elly_list %}
 	{% include "elly/contentelement.html" %}
 {% endfor %}
