@@ -43,7 +43,23 @@ def rssfeed(request):
 def hits(request):
 	if request.method == "POST":
 		urlitem = request.body
-		url = "http://api.parsely.com/v2/analytics/post/detail?apikey="+apikey+"&secret="+token+"&url="+urlitem
-		resposta = urllib2.urlopen(url)
-		hits = json.load(resposta)['data'][0]['visitors']
+		urlhits = "http://api.parsely.com/v2/analytics/post/detail?apikey="+apikey+"&secret="+token+"&url="+urlitem
+		respostahits = urllib2.urlopen(urlhits)
+		hits = json.load(respostahits)['data'][0]['visitors']
 		return HttpResponse(hits)
+
+def likes(request):
+	if request.method == "POST":
+		urlitem = request.body		
+		urllikes = "http://api.parsely.com/v2/shares/post/detail?apikey="+apikey+"&secret="+token+"&url="+urlitem
+		respostalikes = urllib2.urlopen(urllikes)
+		likes = json.load(respostalikes)['data'][0]['fb']
+		return HttpResponse(likes)
+
+def rts(request):
+	if request.method == "POST":
+		urlitem = request.body		
+		urlrts = "http://api.parsely.com/v2/shares/post/detail?apikey="+apikey+"&secret="+token+"&url="+urlitem
+		respostarts = urllib2.urlopen(urlrts)
+		rts = json.load(respostarts)['data'][0]['tw']
+		return HttpResponse(rts)
