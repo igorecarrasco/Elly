@@ -1,13 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
-
-# Create your views here.
-
 from django.http import HttpResponse
 from django.template import loader
 from .models import Elly
-from django.http import HttpResponseRedirect
-from django.utils import feedgenerator
 import re
 import urllib2
 import json
