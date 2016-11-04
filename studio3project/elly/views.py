@@ -35,10 +35,7 @@ def rssfeed(request):
 		objetoelly = Elly.objects.get(id=element)
   		f.write('<item><title>'+objetoelly.title+'</title><link>'+objetoelly.link+'</link><description><![CDATA[]]></description><content:encoded/><pubDate><![CDATA[]]></pubDate><guid isPermaLink="false"><![CDATA[]]></guid><category domain="AccessClassName">FREE</category></item>')
   	f.write('</channel></rss>')
-  	elly_list = Elly.objects.order_by('id')
-  	template = loader.get_template('elly/index.html')
-	context = {'elly_list': elly_list,}
-  	return HttpResponse(template.render(context,request))
+  	return HttpResponse("<h1>RSS feed successfully updated!</h1>")
 
 def hits(request):
 	if request.method == "POST":
@@ -63,3 +60,11 @@ def rts(request):
 		respostarts = urllib2.urlopen(urlrts)
 		rts = json.load(respostarts)['data'][0]['tw']
 		return HttpResponse(rts)
+
+def filter (request):
+	if request.method == "GET":
+		filteredposts = request.GET.get('filter','')
+		filtered_list=Elly.objects.filter(section=filteredposts)
+		template = loader.get_template('elly/index.html')
+		context = {'elly_list': filtered_list,}
+		return HttpResponse(template.render(context,request))

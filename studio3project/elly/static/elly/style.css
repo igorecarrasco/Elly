@@ -2,18 +2,18 @@
 	position:relative;
 	top:40px;
 	background-color:white;
-  width:650px;
-  height:100px;
-  left: 20px;
-  margin-top:10px;
-  padding:5px;
-  font-family: sans-serif;
-  font-weight:300;
-  -webkit-box-shadow: 3px 3px 10px 1px #bbb;
-  -moz-box-shadow: 3px 3px 10px 1px #bbb;
-  box-shadow: 3px 3px 10px 1px #bbb;
-  display:flex;
-  align-items: center;
+	width:650px;
+	height:100px;
+	left: 20px;
+	margin-top:10px;
+	padding:5px;
+	font-family: sans-serif;
+	font-weight:300;
+	-webkit-box-shadow: 1px 1px 4px 1px #bbb;
+	-moz-box-shadow: 1px 1px 4px 1px #bbb;
+	box-shadow: 1px 1px 4px 1px #bbb;
+	display:flex;
+	align-items: center;
 }
 .title {
 	width:280px;
@@ -92,5 +92,5 @@ ul {
 .author {
 	overflow:scroll;
 	height:30px;
-	margin-top:12px;
+	margin-top:11px;
 }

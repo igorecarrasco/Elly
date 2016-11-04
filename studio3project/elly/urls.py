@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'hits', views.hits),
     url(r'likes', views.likes),
     url(r'rts', views.rts),
+    url(r'filter', views.filter),
 ]

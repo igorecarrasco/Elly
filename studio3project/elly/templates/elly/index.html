@@ -10,13 +10,48 @@
 		<link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond" rel="stylesheet">
 	</head>
 	<body>
-		<div class=header>Elly</div>
+		<div class=header><span>Elly</span>
+		<form action="/elly/filter" method="get">
+			<select name="filter">
+				<option value="Opinion">Opinion</option>
+				<option value="Business">Business</option>
+				<option value="Interactives">Interactives</option>
+				<option value="Politics">Politics</option>
+			</select>
+			<input type="submit" value="Filter!">
+		</form>
+		</div>
 		<div class=ellylogo>
-			<img width=150px src= {% static "elly/ellylogo.png" %}></img>
+			<a href= {% url 'index' %}><img width=150px src= {% static "elly/ellylogo.png" %}></img></a>
 		</div>
 		<ul>
 			{% if elly_list %}
-				{% include "elly/contentlist.html" %}
+				<form action="/elly/rssfeed" method="post" id=rssfeed>
+			{% csrf_token %}
+				{% for id in elly_list %}
+					<li>
+						<div class=ellybox>
+							<input id="postid" type="checkbox" name="postid" value="{{ id.id }}">
+								<div class=thumbimg>
+									<img width=85px height=55px src='{{ id.thumb }}'/>
+								</div>
+								<span class=title>
+									<a href='{{ id.link }}' target="_Blank" class="link">{{ id.title }}</a>
+								</span>
+								<span class=author>
+									<em>by {{ id.author }}</em>
+								</span> 
+								<span class=stats>
+									<p>Hits:<span class=hits href='{{ id.link }}'> </span></p>
+									<p><img width=20px src= {% static "elly/like.png" %}> <span class=likes href='{{ id.link }}'> </span></p>
+									<p><img width=18px src= {% static "elly/twitter.png" %}>&nbsp; <span class=rts href='{{ id.link }}'> </span></p>
+								</span>
+							</input>
+						</div>
+					</li>
+			{% endfor %}
+    				<input class=submitbox type="submit" value="OK">
+				</form>
 			{% else %}
 		    	<p class=error>Error: Database empty!</p>
 		    {% endif %}
