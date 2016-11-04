@@ -141,11 +141,12 @@ while i<len(novalista):
 	thumb=novalista[i][4]
 	author=novalista[i][5]
 	section=novalista[i][6]
-	replace=["u'","'","[","]",'"']
+	replace=["u'","'","[","]",'"',"\u2019"]
 	for a in replace:
 		tags=str(tags).replace(a,"")
 		author=str(author).replace(a,"")
-	author=author.replace("\u2019","'")
+		title=title.replace(a,"")
+		section=section.replace(a,"")
 	cur.execute("INSERT INTO elly_elly (title, tags, pubdate, link, thumb, author, section) VALUES (%s,%s,%s,%s,%s,%s,%s)",(title,tags,pubdate,link,thumb,author,section))
 	i=i+1
 

@@ -89,3 +89,8 @@ ul {
 	margin: 3% 3% 0% 3%;
 	background-color:#aaa;
 }
+.author {
+	overflow:scroll;
+	height:30px;
+	margin-top:12px;
+}
