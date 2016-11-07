@@ -119,17 +119,6 @@ for element in listalimpa:
 		if element in listalimpa3:
 			novalista.append(element)
 
-#api call for page views 
-"""
-for element in novalista:
-	url = "http://api.parsely.com/v2/analytics/post/detail?apikey="+apikey+"&secret="+token+"&url="+element[3]
-	resposta = urllib2.urlopen(url)
-	hits = json.load(resposta)['data'][0]['visitors']
-	element.append(hits)
-"""
-#create test table "tabelateste"
-#cur.execute("CREATE TABLE IF NOT EXISTS elly_elly (id serial PRIMARY KEY, title varchar, tags varchar, pubdate varchar, link varchar, thumb varchar, author varchar);")
-
 #write to the database title, tag list, published date, link, thumbnail url, author
 #in the corresponding fields
 i=0
@@ -145,7 +134,7 @@ while i<len(novalista):
 	for a in replace:
 		tags=str(tags).replace(a,"")
 		author=str(author).replace(a,"")
-		title=str(title).replace(a,"")
+		title=title.replace(a,"")
 		section=section.replace(a,"")
 	author=author.replace("\u2019","'")
 	title=title.replace("\u2019","'")

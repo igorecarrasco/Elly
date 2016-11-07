@@ -26,11 +26,15 @@ def rssfeed(request):
   	f=open('elly/rssfeed.rss','w')
   	f.write('<?xml version="1.0" encoding="UTF-8"?><channel><title>Weekend Social Scheduling - Tweets</title><link>http://online.wsj.com/page/2_0062.html</link><atom:link type="application/rss+xml" rel="self" href="http://online.wsj.com/page/2_0062.html"/><description>Social Headlines for Methode Articles</description><language>en-us</language><pubDate>Wed, 02 Nov 2016 18:19:52 -0400</pubDate><lastBuildDate>Wed, 02 Nov 2016 18:19:52 -0400</lastBuildDate><copyright>Dow Jones &amp; Company, Inc.</copyright><generator>http://online.wsj.com/page/2_0062.html</generator><docs>http://cyber.law.harvard.edu/rss/rss.html</docs><image><title>Social Headlines for Methode Articles</title><link>http://online.wsj.com/page/2_0062.html</link><url>http://online.wsj.com/img/wsj_sm_logo.gif</url></image>')
 	postids = request.POST.getlist('postid','')
+	elementlist = []
 	for element in postids:
 		objetoelly = Elly.objects.get(id=element)
   		f.write('<item><title>'+objetoelly.title+'</title><link>'+objetoelly.link+'</link><description><![CDATA[]]></description><content:encoded/><pubDate><![CDATA[]]></pubDate><guid isPermaLink="false"><![CDATA[]]></guid><category domain="AccessClassName">FREE</category></item>')
+  		elementlist.append(objetoelly.title)
+  	# print json.loads(elementlist)[0]
   	f.write('</channel></rss>')
-  	return HttpResponse("<h1>RSS feed successfully updated!</h1>")
+  	print len(elementlist)
+  	return HttpResponse("<h1>RSS feed successfully updated with stories:"+"<p>"+str(elementlist[0])+"</p>"+"</h1>")
 
 def hits(request):
 	if request.method == "POST":
