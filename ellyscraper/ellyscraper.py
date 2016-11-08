@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 """
 PARSE.LY API SCRAPER
@@ -136,8 +137,10 @@ while i<len(novalista):
 		author=str(author).replace(a,"")
 		title=title.replace(a,"")
 		section=section.replace(a,"")
-	author=author.replace("\u2019","'")
-	title=title.replace("\u2019","'")
+	author = author.encode('utf_8')
+	author = author.replace("’","'")
+	title = title.encode('utf_8')
+	title = title.replace("’","'")
 	cur.execute("INSERT INTO elly_elly (title, tags, pubdate, link, thumb, author, section) VALUES (%s,%s,%s,%s,%s,%s,%s)",(title,tags,pubdate,link,thumb,author,section))
 	i=i+1
 

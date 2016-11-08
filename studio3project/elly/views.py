@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
@@ -9,6 +10,7 @@ import json
 import os
 from os.path import join,dirname
 from dotenv import load_dotenv
+from django.utils.encoding import smart_str, smart_unicode
 
 dotenv_path = join(dirname(__file__),'..','..','.env')
 load_dotenv(dotenv_path)
@@ -29,12 +31,11 @@ def rssfeed(request):
 	elementlist = []
 	for element in postids:
 		objetoelly = Elly.objects.get(id=element)
-  		f.write('<item><title>'+objetoelly.title+'</title><link>'+objetoelly.link+'</link><description><![CDATA[]]></description><content:encoded/><pubDate><![CDATA[]]></pubDate><guid isPermaLink="false"><![CDATA[]]></guid><category domain="AccessClassName">FREE</category></item>')
+		titulo = objetoelly.title
+  		f.write('<item><title>'+titulo+'</title><link>'+objetoelly.link+'</link><description><![CDATA[]]></description><content:encoded/><pubDate><![CDATA[]]></pubDate><guid isPermaLink="false"><![CDATA[]]></guid><category domain="AccessClassName">FREE</category></item>')
   		elementlist.append(objetoelly.title)
-  	# print json.loads(elementlist)[0]
   	f.write('</channel></rss>')
-  	print len(elementlist)
-  	return HttpResponse("<h1>RSS feed successfully updated with stories:"+"<p>"+str(elementlist[0])+"</p>"+"</h1>")
+  	return HttpResponse("<h1>RSS feed successfully updated with stories:"+"<p>"+elementlist[0]+"</p>"+"</h1>")
 
 def hits(request):
 	if request.method == "POST":
