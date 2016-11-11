@@ -24,38 +24,38 @@ apikey= os.getenv('parselyapikey')
 ckey = os.getenv('ckeysf')
 csecret = os.getenv('csecretsf')
 
-request_token_url = 'https://www.socialflow.com/oauth/request_token?oauth_callback=oob'
-oauth = OAuth1Session(ckey, client_secret=csecret)
+# request_token_url = 'https://www.socialflow.com/oauth/request_token?oauth_callback=oob'
+# oauth = OAuth1Session(ckey, client_secret=csecret)
 
-fetch_response = oauth.fetch_request_token(request_token_url)
-resource_owner_key = fetch_response.get('oauth_token')
-resource_owner_secret = fetch_response.get('oauth_token_secret')
+# fetch_response = oauth.fetch_request_token(request_token_url)
+# resource_owner_key = fetch_response.get('oauth_token')
+# resource_owner_secret = fetch_response.get('oauth_token_secret')
 
-base_authorization_url = 'https://www.socialflow.com/oauth/authorize'
+# base_authorization_url = 'https://www.socialflow.com/oauth/authorize'
 
-authorize_url = base_authorization_url + '?oauth_token='
-authorize_url = authorize_url + resource_owner_key
-print 'Please go her and authorize', authorize_url
-verifier = raw_input('Plaese input the verifier')
+# authorize_url = base_authorization_url + '?oauth_token='
+# authorize_url = authorize_url + resource_owner_key
+# print 'Please go her and authorize', authorize_url
+# verifier = raw_input('Plaese input the verifier')
 
-access_token_url = 'https://www.socialflow.com/oauth/access_token'
+# access_token_url = 'https://www.socialflow.com/oauth/access_token'
 
-oauth = OAuth1Session(ckey,
-	client_secret=csecret,
-	resource_owner_key=resource_owner_key,
-	resource_owner_secret=resource_owner_secret,
-	verifier=verifier)
+# oauth = OAuth1Session(ckey,
+# 	client_secret=csecret,
+# 	resource_owner_key=resource_owner_key,
+# 	resource_owner_secret=resource_owner_secret,
+# 	verifier=verifier)
 
-oauth_tokens = oauth.fetch_access_token(access_token_url)
+# oauth_tokens = oauth.fetch_access_token(access_token_url)
 
-resource_owner_key = oauth_tokens.get('oauth_token')
-resource_owner_secret = oauth_tokens.get('oauth_token_secret')
+# resource_owner_key = oauth_tokens.get('oauth_token')
+# resource_owner_secret = oauth_tokens.get('oauth_token_secret')
 
-headeroauth = OAuth1(ckey,
-	csecret,
-	resource_owner_key,
-	resource_owner_secret,
-	signature_type='auth_header')
+# headeroauth = OAuth1(ckey,
+# 	csecret,
+# 	resource_owner_key,
+# 	resource_owner_secret,
+# 	signature_type='auth_header')
 
 def index(request):
 	elly_list = Elly.objects.order_by('-id')
@@ -63,13 +63,10 @@ def index(request):
 	context = {'elly_list': elly_list,}
 	return HttpResponse(template.render(context,request))
 
-def socialflow(request):
-	randnumber = random.randint(1,99999999)
-	urlsocialflow = "https://api.socialflow.com/account/list?account_type=twitter&limit=3"
-	r = oauth.get(urlsocialflow)
-	return HttpResponse(r)
-# socialflowreponse = urllib2.urlopen(urlsocialflow)
-# pprint (socialflowreponse)
+# def socialflow(request):
+# 	urlsocialflow = "https://api.socialflow.com/account/list?account_type=twitter&limit=3"
+# 	r = oauth.get(urlsocialflow)
+# 	return HttpResponse(r)
 
 def rssfeed(request):
 	if request.method == "POST":
