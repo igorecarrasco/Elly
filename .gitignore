@@ -1,7 +1,5 @@
 .env
 /venv
-/studio3project/elly/*.pyc
-/studio3project/studioproject/*.pyc
-/studio3project/twitlister/*.pyc
+*.pyc
 *.rss
 studio3project/static/*
