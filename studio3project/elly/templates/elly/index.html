@@ -38,11 +38,12 @@
 								<img width=85px height=55px src='{{ id.thumb }}'/>
 							</div>
 							<span class=title>
+								<h6 class='section'>{{ id.section }}</h6>
 								<a href='{{ id.link }}' target="_Blank" class="link">{{ id.title }}</a>
 							</span>
 							<span class=author>
 								<em>by {{ id.author }}</em>
-							</span> 
+							</span>
 							<span class=stats>
 								<p>Hits:<span class=hits href='{{ id.link }}'> </span></p>
 								<p><img width=20px src= {% static "elly/like.png" %}> <span class=likes href='{{ id.link }}'> </span></p>
