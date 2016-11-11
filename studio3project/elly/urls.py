@@ -9,5 +9,5 @@ urlpatterns = [
     url(r'likes', views.likes),
     url(r'rts', views.rts),
     url(r'filter', views.filter),
-    url(r'socialflow',views.socialflow)
+    # url(r'socialflow',views.socialflow)
 ]
