@@ -1,2 +1,2 @@
-python ellyscraper/ellyscraper.python
+python ellyscraper/ellyscraper.py
 echo "end ellyscraper"
