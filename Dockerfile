@@ -28,6 +28,7 @@ RUN apt-get update && apt-get install -y \
 	supervisor \
 	libpcre3 \
 	libpcre3-dev \
+	cron \
   && rm -rf /var/lib/apt/lists/*
 
 RUN easy_install pip
@@ -52,6 +53,19 @@ RUN mkdir /home/docker/code/studio3project/static
 RUN rm -rf /home/docker/code/studio3project/studio3project/static
 RUN mkdir /home/docker/code/studio3project/studio3project/static
 RUN python /home/docker/code/studio3project/manage.py collectstatic --noinput
+
+RUN mkdir /cron
+
+# parsely api scraper
+COPY update_ellyscraper.sh /cron/update_ellyscraper.sh
+RUN chmod +x /cron/update_ellyscraper.sh
+# RUN sh /cron/update_ellyscraper.sh
+
+# set up cronjob
+COPY cronsetup.config /cron/cronsetup.config
+RUN touch /cron/cron.log
+RUN crontab /cron/cronsetup.config
+RUN chmod 600 /etc/crontab
 
 # setup all the configfiles
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
