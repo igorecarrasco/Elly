@@ -1,17 +1,4 @@
 *.pyc
 .env
 /venv
-
-*.pyc
-
 *.rss
-
-*.pyc
-
-*.pyc
-
-*.pyc
-
-studio3project/elly/__init__.pyc
-
-studio3project/elly/templates/elly/rssfeed.html
