@@ -13,3 +13,5 @@
 *.pyc
 
 studio3project/elly/__init__.pyc
+
+studio3project/elly/templates/elly/rssfeed.html
