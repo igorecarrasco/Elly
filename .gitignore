@@ -1,4 +1,6 @@
-*.pyc
 .env
 /venv
+*.rss
+studio3project/static/*
+*.pyc
 *.rss
