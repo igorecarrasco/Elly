@@ -6,6 +6,7 @@ from django.template import loader
 from .models import Elly
 import re
 import urllib2
+import urllib
 import json
 import os
 import random
@@ -74,6 +75,7 @@ def rssfeed(request):
 		for element in postids:
 			objetoelly = Elly.objects.get(id=element)
 			titulo = objetoelly.title
+			titulo = urllib.quote(titulo,safe= "")
 			link = objetoelly.link
 			urltwit = "https://api.socialflow.com/message/add?service_user_id="+suid+"&account_type=twitter&message="+titulo+" "+link+"&publish_option=hold&shorten_links=1"
 			r = oauth.get(urltwit)
