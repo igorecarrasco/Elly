@@ -14,8 +14,9 @@ from os.path import join,dirname
 from dotenv import load_dotenv
 
 #load env path and file
-dotenv_path = join(dirname(__file__),'..','.env')
-load_dotenv(dotenv_path)
+if os.getenv('parselytoken') == None:
+	dotenv_path = join(dirname(__file__),'..','.env')
+	load_dotenv(dotenv_path)
 
 #load parameters from env file
 token = os.getenv('parselytoken')
@@ -66,6 +67,7 @@ while i<len(dados):
 #repeat for 48h stats
 response = urllib2.urlopen(doisdia)
 dados = json.load(response)['data']
+print dados
 
 listalimpa2 = []
 i=0

@@ -57,6 +57,7 @@ RUN python /home/docker/code/studio3project/manage.py collectstatic --noinput
 RUN mkdir /cron
 
 # parsely api scraper
+COPY ellyscraper /ellyscraper
 COPY update_ellyscraper.sh /cron/update_ellyscraper.sh
 RUN chmod +x /cron/update_ellyscraper.sh
 # RUN sh /cron/update_ellyscraper.sh
