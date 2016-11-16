@@ -1,6 +1,25 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+{% load static %}
+	<head>
+		<link rel="stylesheet" type="text/css" href= {% static "elly/style.css" %}>
+		<link rel="icon" href= {% static "elly/favicon.png" %}>
+		<title>Elly Beta 1.0</title>
+		<meta charset="UTF-8">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond" rel="stylesheet">
+	</head>
+
+	<body>
+		<div class=header>
+			<span>Elly</span>
+		</div>
+		<div class=ellylogo>
+			<a href= {% url 'lister' %}><img width=150px src= {% static "elly/ellylogo.png" %}></img></a>
+		</div>
 
 <p>Wrote stories:</p> {% for object in listtitles %}
 {{ object }}<br>
-{% endfor %}
+{% endfor %} to database.
 
-To database.
+<a href= {% url 'lister' %}>Click here to get back to story list</a>
