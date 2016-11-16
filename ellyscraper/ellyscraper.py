@@ -122,6 +122,7 @@ for element in listalimpa:
 		if element in listalimpa3:
 			novalista.append(element)
 
+pprint(novalista)
 #write to the database title, tag list, published date, link, thumbnail url, author
 #in the corresponding fields
 i=0
