@@ -32,7 +32,7 @@
 			</form>
 		</div>
 		<div class=ellylogo>
-			<a href= {% url 'index' %}><img width=150px src= {% static "elly/ellylogo.png" %}></img></a>
+			<a href= {% url 'lister' %}><img width=150px src= {% static "elly/ellylogo.png" %}></img></a>
 		</div>
 		<ul>
 		{% if elly_list %}
@@ -52,6 +52,7 @@
 							<span class=author>
 								<em>by {{ id.author }}</em>
 							</span>
+							<p class=published>Published: <span class=pubdate href='{{ id.link }}'> </span></p>
 							<span class=stats>
 								<p>Hits:<span class=hits href='{{ id.link }}'> </span></p>
 								<p><img width=20px src= {% static "elly/like.png" %}> <span class=likes href='{{ id.link }}'> </span></p>

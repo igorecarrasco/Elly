@@ -122,6 +122,14 @@ def rts(request):
 		rts = json.load(respostarts)['data'][0]['tw']
 		return HttpResponse(rts)
 
+def pubdate(request):
+	if request.method == "POST":
+		urlitem = request.body		
+		urlpubdate = "http://api.parsely.com/v2/analytics/post/detail?apikey="+apikey+"&secret="+token+"&url="+urlitem
+		respostapubdates = urllib2.urlopen(urlpubdate)
+		pubdate = json.load(respostapubdates)['data'][0]['pub_date']
+		return HttpResponse(pubdate)
+
 def filter (request):
 	if request.method == "GET":
 		filteredposts = request.GET.get('filter','')

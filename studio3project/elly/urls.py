@@ -10,5 +10,6 @@ urlpatterns = [
     url(r'likes', views.likes),
     url(r'rts', views.rts),
     url(r'filter', views.filter),
+    url(r'pubdate', views.pubdate),
     url(r'socialflow',views.socialflow)
 ]
