@@ -22,5 +22,5 @@ urlpatterns = [
     url(r'^twitlister/', include('twitlister.urls')),
     url(r'^elly/', include('elly.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^_health', include('elly.urls')),
+    # url(r'^_health', include('elly.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

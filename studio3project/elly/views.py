@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from .models import Elly
 import re
@@ -15,6 +15,7 @@ from os.path import join,dirname
 from dotenv import load_dotenv
 from django.utils.encoding import smart_str, smart_unicode
 from requests_oauthlib import OAuth1Session, OAuth1
+from django.core.urlresolvers import reverse
 import requests
 
 dotenv_path = join(dirname(__file__),'..','..','.env')
@@ -25,40 +26,33 @@ ckey = os.getenv('ckeysf')
 csecret = os.getenv('csecretsf')
 suid = os.getenv('serviceuserid')
 
-request_token_url = 'https://www.socialflow.com/oauth/request_token?oauth_callback=oob'
-oauth = OAuth1Session(ckey, client_secret=csecret)
-
-fetch_response = oauth.fetch_request_token(request_token_url)
-resource_owner_key = fetch_response.get('oauth_token')
-resource_owner_secret = fetch_response.get('oauth_token_secret')
-
+access_token_url = 'https://www.socialflow.com/oauth/access_token'
 base_authorization_url = 'https://www.socialflow.com/oauth/authorize'
 
-authorize_url = base_authorization_url + '?oauth_token='
-authorize_url = authorize_url + resource_owner_key
-print 'Please go her and authorize', authorize_url
-verifier = raw_input('Plaese input the verifier')
+# print 'Please go her and authorize', authorize_url
+# verifier = raw_input('Plaese input the verifier')
 
-access_token_url = 'https://www.socialflow.com/oauth/access_token'
+def login(request):
+	#first steps of oauth1 login
+	urlcallback = request.build_absolute_uri(reverse('lister'))
+	request_token_url = 'https://www.socialflow.com/oauth/request_token'+ '?oauth_callback=' + urlcallback
+	oauth = OAuth1Session(ckey, client_secret=csecret)
+	fetch_response = oauth.fetch_request_token(request_token_url)
+	resource_owner_key = fetch_response.get('oauth_token')
+	resource_owner_secret = fetch_response.get('oauth_token_secret')
+	request.session['resource_owner_key'] = resource_owner_key
+	request.session['resource_owner_secret'] = resource_owner_secret
+	authorize_url = base_authorization_url + '?oauth_token=' 
+	authorize_url = authorize_url + resource_owner_key + '&oauth_callback=' + urlcallback
+	#drive user to lister view, where rest of authorization can take place
+	return HttpResponseRedirect(authorize_url)
 
-oauth = OAuth1Session(ckey,
-	client_secret=csecret,
-	resource_owner_key=resource_owner_key,
-	resource_owner_secret=resource_owner_secret,
-	verifier=verifier)
-
-oauth_tokens = oauth.fetch_access_token(access_token_url)
-
-resource_owner_key = oauth_tokens.get('oauth_token')
-resource_owner_secret = oauth_tokens.get('oauth_token_secret')
-
-headeroauth = OAuth1(ckey,
-	csecret,
-	resource_owner_key,
-	resource_owner_secret,
-	signature_type='auth_header')
-
-def index(request):
+def lister(request):
+	#process taking on from where we left off on index
+	verifier = request.GET.get('oauth_verifier')
+	request.session['verifier'] = verifier
+	resource_owner_key = request.GET.get('oauth_token')
+	request.session['resource_owner_key'] = resource_owner_key
 	elly_list = Elly.objects.order_by('-id')
 	template = loader.get_template('elly/index.html')
 	context = {'elly_list': elly_list,}
@@ -69,26 +63,39 @@ def socialflow(request):
 	r = oauth.get(urlsocialflow)
 	return HttpResponse(r)
 
-def rssfeed(request):
+def posttweets(request):
+	resource_owner_secret = request.session['resource_owner_secret']
+	verifier = request.session['verifier']
+	resource_owner_key = request.session['resource_owner_key']
+	oauth = OAuth1Session(ckey,
+		client_secret=csecret,
+		resource_owner_key=resource_owner_key,
+		resource_owner_secret=resource_owner_secret,
+		verifier=verifier)
+	oauth_tokens = oauth.fetch_access_token(access_token_url)
+	resource_owner_key = oauth_tokens.get('oauth_token')
+	resource_owner_secret = oauth_tokens.get('oauth_token_secret')
+	request.session['resource_owner_key'] = resource_owner_key
+	request.session['resource_owner_secret'] = resource_owner_secret
+	headeroauth = OAuth1(ckey,
+		csecret,
+		resource_owner_key,
+		resource_owner_secret,
+		signature_type='auth_header')
 	if request.method == "POST":
 		postids = request.POST.getlist('postid','')
+		listtitles = []
 		for element in postids:
 			objetoelly = Elly.objects.get(id=element)
 			titulo = objetoelly.title
 			titulo = urllib.quote(titulo,safe= "")
 			link = objetoelly.link
+			listtitles.append(titulo+" ")
 			urltwit = "https://api.socialflow.com/message/add?service_user_id="+suid+"&account_type=twitter&message="+titulo+" "+link+"&publish_option=hold&shorten_links=1"
 			r = oauth.get(urltwit)
-	# 	f=open('elly/rssfeed.rss','w')
-	# 	f.write('<?xml version="1.0" encoding="UTF-8"?><channel><title>Weekend Social Scheduling - Tweets</title><link>http://online.wsj.com/page/2_0062.html</link><atom:link type="application/rss+xml" rel="self" href="http://online.wsj.com/page/2_0062.html"/><description>Social Headlines for Methode Articles</description><language>en-us</language><pubDate>Wed, 02 Nov 2016 18:19:52 -0400</pubDate><lastBuildDate>Wed, 02 Nov 2016 18:19:52 -0400</lastBuildDate><copyright>Dow Jones &amp; Company, Inc.</copyright><generator>http://online.wsj.com/page/2_0062.html</generator><docs>http://cyber.law.harvard.edu/rss/rss.html</docs><image><title>Social Headlines for Methode Articles</title><link>http://online.wsj.com/page/2_0062.html</link><url>http://online.wsj.com/img/wsj_sm_logo.gif</url></image>')
-	# postids = request.POST.getlist('postid','')
-	# for element in postids:
-	# 	objetoelly = Elly.objects.get(id=element)
-	# 	titulo = objetoelly.title
-	# 	f.write('<item><title>'+titulo+'</title><link>'+objetoelly.link+'</link><description><![CDATA[]]></description><content:encoded/><pubDate><![CDATA[]]></pubDate><guid isPermaLink="false"><![CDATA[]]></guid><category domain="AccessClassName">FREE</category></item>')
-	# 	f.write('</channel></rss>')
+	print listtitles
 	template = loader.get_template('elly/rssfeed.html')
-	context = {'postids':postids,}
+	context = {'listtitles':listtitles,}
   	return HttpResponse(template.render(context,request))
 
 def hits(request):

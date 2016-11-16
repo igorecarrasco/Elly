@@ -36,7 +36,7 @@
 		</div>
 		<ul>
 		{% if elly_list %}
-			<form action="/elly/rssfeed" method="post" id=rssfeed>
+			<form action="/elly/posttweets" method="post" id=posttweets>
 		{% csrf_token %}
 			{% for id in elly_list %}
 				<li>
