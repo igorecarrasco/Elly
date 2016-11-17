@@ -30,6 +30,10 @@
 				</select>
 				<input type="submit" value="Filter" id=filterbox>
 			</form>
+			<form action="/elly/search" method="get">
+				<input type="text" name="search" size="25">
+				<input type="submit" value="Search" id=searchbox>
+			</form>
 		</div>
 		<div class=ellylogo>
 			<a href= {% url 'lister' %}><img width=150px src= {% static "elly/ellylogo.png" %}></img></a>

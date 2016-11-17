@@ -16,6 +16,7 @@ from dotenv import load_dotenv
 from django.utils.encoding import smart_str, smart_unicode
 from requests_oauthlib import OAuth1Session, OAuth1
 from django.core.urlresolvers import reverse
+from django.contrib.postgres.search import SearchVector
 import requests
 
 dotenv_path = join(dirname(__file__),'..','..','.env')
@@ -135,4 +136,15 @@ def filter (request):
 		filtered_list=Elly.objects.filter(section=filteredposts)
 		template = loader.get_template('elly/index.html')
 		context = {'elly_list': filtered_list,}
+		return HttpResponse(template.render(context,request))
+		
+
+def search (request):
+	if request.method == "GET":
+		searchobject = request.GET.get('search','')
+		searched_list = Elly.objects.annotate(search=SearchVector('tags', 'title'),
+			).filter(search=searchobject)
+		print searched_list
+		template = loader.get_template('elly/index.html')
+		context = {'elly_list': searched_list,}
 		return HttpResponse(template.render(context,request))

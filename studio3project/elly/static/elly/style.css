@@ -5,6 +5,9 @@
 	text-transform:uppercase;
 	letter-spacing: 0.5px;
 }
+form {
+	display:inline;
+}
 .ellybox {
 	position:relative;
 	top:40px;
@@ -102,6 +105,7 @@ ul {
 	padding:0;
 	margin:0;
 }
+
 #submitbox {
 	position:fixed;
 	top:50vh;
@@ -127,6 +131,18 @@ ul {
 	text-decoration: none;
 }
 #filterbox:hover {
+	background: #c9c9c9;
+	text-decoration: none;
+}
+#searchbox {
+	border:none;
+	color: #ffffff;
+	font-size: 10px;
+	background: #949494;
+	padding: 3px 6px 3px 6px;
+	text-decoration: none;
+}
+#searchbox:hover {
 	background: #c9c9c9;
 	text-decoration: none;
 }
