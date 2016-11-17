@@ -34,7 +34,6 @@ umdia = 'http://api.parsely.com/v2/analytics/posts?apikey='+apikey+'&secret='+to
 doisdia = 'http://api.parsely.com/v2/analytics/posts?apikey='+apikey+'&secret='+token+'&days=2&limit=15'
 tresdia = 'http://api.parsely.com/v2/analytics/posts?apikey='+apikey+'&secret='+token+'&days=3&limit=15'
 
-
 #capture 24h stats
 response = urllib2.urlopen(umdia)
 dados = json.load(response)['data']
@@ -113,14 +112,100 @@ while i<len(dados):
 	listalimpa3.append([title , tags , pubdate , link, thumb, authors, section])
 	i=i+1
 
-#compare lists and return only posts that were present in both 24h and 48h calls
+#compare lists and return only posts that were present in both 24h, 48h and 72h calls
 novalista =[]
 for element in listalimpa:
 	if element in listalimpa2:
 		if element in listalimpa3:
 			novalista.append(element)
 
-pprint(novalista)
+#start of section-specific calls - Life, 72h
+sectioncall = 'http://api.parsely.com/v2/analytics/section/Life/detail?apikey='+apikey+'&secret='+token+'&days=3&limit=20'
+response = urllib2.urlopen(sectioncall)
+dados = json.load(response)['data']
+
+lifelimpa1 = []
+i=0
+while i<len(dados):
+	title=dados[i]['title']
+	tags=[]
+	a=0
+	while a<len(dados[i]['tags']): 
+		tags.append(dados[i]['tags'][a])
+		a=a+1
+	pubdate=dados[i]['pub_date']
+	link=dados[i]['link']
+	thumb=dados[i]['image_url']
+	authors=[]
+	b=0
+	while b<len(dados[i]['authors']): 
+		authors.append(dados[i]['authors'][b])
+		b=b+1
+	section=dados[i]['section']
+	lifelimpa1.append([title , tags , pubdate , link, thumb, authors, section])
+	i=i+1
+
+#life - 48h
+sectioncall = 'http://api.parsely.com/v2/analytics/section/Life/detail?apikey='+apikey+'&secret='+token+'&days=2&limit=20'
+response = urllib2.urlopen(sectioncall)
+dados = json.load(response)['data']
+
+lifelimpa2 = []
+i=0
+while i<len(dados):
+	title=dados[i]['title']
+	tags=[]
+	a=0
+	while a<len(dados[i]['tags']): 
+		tags.append(dados[i]['tags'][a])
+		a=a+1
+	pubdate=dados[i]['pub_date']
+	link=dados[i]['link']
+	thumb=dados[i]['image_url']
+	authors=[]
+	b=0
+	while b<len(dados[i]['authors']): 
+		authors.append(dados[i]['authors'][b])
+		b=b+1
+	section=dados[i]['section']
+	lifelimpa2.append([title , tags , pubdate , link, thumb, authors, section])
+	i=i+1
+
+#for 24h
+sectioncall = 'http://api.parsely.com/v2/analytics/section/Life/detail?apikey='+apikey+'&secret='+token+'&days=1&limit=20'
+response = urllib2.urlopen(sectioncall)
+dados = json.load(response)['data']
+
+lifelimpa3 = []
+i=0
+while i<len(dados):
+	title=dados[i]['title']
+	tags=[]
+	a=0
+	while a<len(dados[i]['tags']): 
+		tags.append(dados[i]['tags'][a])
+		a=a+1
+	pubdate=dados[i]['pub_date']
+	link=dados[i]['link']
+	thumb=dados[i]['image_url']
+	authors=[]
+	b=0
+	while b<len(dados[i]['authors']): 
+		authors.append(dados[i]['authors'][b])
+		b=b+1
+	section=dados[i]['section']
+	lifelimpa3.append([title , tags , pubdate , link, thumb, authors, section])
+	i=i+1
+
+lifelista =[]
+for element in lifelimpa1:
+	if element in lifelimpa2:
+		if element in lifelimpa3:
+			lifelista.append(element)
+
+for element in lifelista:
+	novalista.append(element)
+
 #write to the database title, tag list, published date, link, thumbnail url, author
 #in the corresponding fields
 i=0

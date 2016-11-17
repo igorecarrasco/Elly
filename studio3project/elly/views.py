@@ -93,7 +93,6 @@ def posttweets(request):
 			listtitles.append(objetoelly.title)
 			urltwit = "https://api.socialflow.com/message/add?service_user_id="+suid+"&account_type=twitter&message="+titulo+" "+link+"&publish_option=hold&shorten_links=1"
 			r = oauth.get(urltwit)
-	print listtitles
 	template = loader.get_template('elly/rssfeed.html')
 	context = {'listtitles':listtitles,}
   	return HttpResponse(template.render(context,request))
