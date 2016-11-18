@@ -108,6 +108,7 @@ def posttweets(request):
 		for element in postids:
 			objetoelly = Elly.objects.get(id=element)
 			titulo = objetoelly.title
+			titulo = titulo.encode('utf8')
 			titulo = urllib.quote(titulo,safe= "")
 			link = objetoelly.link
 			urltwit = "https://api.socialflow.com/message/add?service_user_id="+suid+"&account_type=twitter&message="+titulo+" "+link+"&publish_option="+schedtype+optimizestartdate+optimizeenddate+"&shorten_links=1"

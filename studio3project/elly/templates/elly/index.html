@@ -37,13 +37,13 @@
 			</form>
 		</div>
 		<div class=ellylogo>
-			<a href= {% url 'lister' %}><img width=150px src= {% static "elly/ellylogo.png" %}></img></a>
+			<a href= {% url 'login' %}><img width=150px src= {% static "elly/ellylogo.png" %}></img></a>
 		</div>
 		<ul>
-		{% if elly_list %}
+			{% if elly_list %}
 			<form action="/elly/posttweets" method="post" id=posttweets>
-		{% csrf_token %}
-			{% for id in elly_list %}
+			{% csrf_token %}
+				{% for id in elly_list %}
 				<li>
 					<div class=ellybox>
 						<input id="postid" type="checkbox" name="postid" value="{{ id.id }}" class=checkbox>
@@ -66,22 +66,21 @@
 						</input>
 					</div>
 				</li>
-			{% endfor %}
+				{% endfor %}
 				<div class=rightbox>
-					
-    			<input id=submitbox type="submit" value="Submit Posts"><br>
-    			<input type="radio" name="schedtype" value="hold">Hold</input>
-				<input type="radio" name="schedtype" value="optimize" id=optimizefield>Optimize</input>
+	    			<input id=submitbox type="submit" value="Submit Posts"><br>
+	    			<input type="radio" name="schedtype" value="hold">Hold</input>
+					<input type="radio" name="schedtype" value="optimize" id=optimizefield>Optimize</input>
 				<br>
-				<select name="schedtime" class="reveal-if-active">
-				<option value="72">72h</option>
-				<option value="24">24h</option>
-				<option value="2">2h</option>
-				</select>
+					<select name="schedtime" class="reveal-if-active">
+						<option value="48">48h</option>
+						<option value="24">24h</option>
+						<option value="2">2h</option>
+					</select>
     			</div>
-				</form>
+			</form>
 			{% else %}
-		    	<p class=error>Error: No Stories!</p>
+		    <p class=error>Error: No articles found!</p>
 		    {% endif %}
 		</ul>
 	</body>

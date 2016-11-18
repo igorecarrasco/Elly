@@ -1,13 +1,13 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-{% load static %}
+	{% load static %}
 	<head>
-		<link rel="stylesheet" type="text/css" href= {% static "elly/style.css" %}>
-		<link rel="icon" href= {% static "elly/favicon.png" %}>
-		<title>Elly Beta 1.0</title>
-		<meta charset="UTF-8">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-		<link href="https://fonts.googleapis.com/css?family=Nova+Mono" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href= {% static "elly/style.css" %}>
+	<link rel="icon" href= {% static "elly/favicon.png" %}>
+	<title>Elly Beta 1.0</title>
+	<meta charset="UTF-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Nova+Mono" rel="stylesheet">
 	</head>
 
 	<body>
@@ -17,9 +17,9 @@
 		<div class=ellylogo>
 			<a href= {% url 'login' %}><img width=150px src= {% static "elly/ellylogo.png" %}></img></a>
 		</div>
-
-<div class=writtentodb>Wrote stories below to SocialFlow queue:</div> {% for object in listtitles %}
-<div class=ellybox>{{ object }}</div>
-{% endfor %}
-
-<p class=writtentodb><a href= {% url 'login' %}>Click here to get back to story list</a></p>
+		<div class=writtentodb>Wrote stories below to SocialFlow queue:</div>
+		{% for object in listtitles %}
+		<div class=ellybox>{{ object }}</div>
+		{% endfor %}
+		<p class=writtentodb><a href= {% url 'login' %}>Click here to get back to story list</a></p>
+	</body>

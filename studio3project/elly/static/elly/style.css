@@ -9,6 +9,7 @@ form {
 	display:inline;
 }
 .ellybox {
+	border-radius:3px;
 	position:relative;
 	top:40px;
 	background-color:white;
@@ -110,6 +111,8 @@ ul {
 	right:20px;
 }
 #submitbox {
+	border-radius:2px;
+
 	font-family: Arial;
 	border:none;
 	color: #ffffff;
