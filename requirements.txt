@@ -12,3 +12,4 @@ requests==2.11.1
 requests-oauthlib==0.7.0
 simplejson==3.8.2
 six==1.4.1
+BeautifulSoup==3.2.1

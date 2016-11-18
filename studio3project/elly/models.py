@@ -12,5 +12,6 @@ class Elly(models.Model):
 	thumb = models.TextField()
 	author = models.TextField()
 	section = models.TextField()
+	socialhed = models.TextField(default="")
 	# def __str__(self):
  #    	return self.title

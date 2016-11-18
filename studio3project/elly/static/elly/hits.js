@@ -58,18 +58,3 @@ $('.rts').each(function(linkItems){
 		$elemento.append(data)
 	}
 });
-
-$('.pubdate').each(function(linkItems){
-	var $elemento = $(this);
-	$.post({
-		headers: { "X-CSRFToken": getCookie("csrftoken") },
-		url: 'pubdate',
-		data: $elemento.attr('href'),
-		dataType: 'text',
-		success: hitsCallback,
-	});
-	function hitsCallback(data){
-		$elemento.append(data)
-		console.log()
-	}
-});

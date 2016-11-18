@@ -12,6 +12,7 @@ from pprint import pprint
 import os
 from os.path import join,dirname
 from dotenv import load_dotenv
+from BeautifulSoup import BeautifulSoup
 
 #load env path and file
 dotenv_path = join(dirname(__file__),'..','.env')
@@ -294,8 +295,14 @@ for element in lifelimpa1:
 for element in lifelista:
 	novalista.append(element)
 
-
-
+i=0
+while i<len(novalista):
+	urllink=novalista[i][3]
+	soup = BeautifulSoup(urllib2.urlopen(urllink))
+	result = soup.findAll('meta',{'name' : 'article.headline'})
+	result = result[0]['content']
+	novalista[i].append(result)
+	i=i+1
 
 #write to the database title, tag list, published date, link, thumbnail url, author
 #in the corresponding fields
@@ -308,6 +315,7 @@ while i<len(novalista):
 	thumb=novalista[i][4]
 	author=novalista[i][5]
 	section=novalista[i][6]
+	socialhed=novalista[i][7]
 	replace=["u'","'","[","]",'"']
 	for a in replace:
 		tags=str(tags).replace(a,"")
@@ -318,7 +326,7 @@ while i<len(novalista):
 	author = author.replace("’","'")
 	title = title.encode('utf_8')
 	title = title.replace("’","'")
-	cur.execute("INSERT INTO elly_elly (title, tags, pubdate, link, thumb, author, section) VALUES (%s,%s,%s,%s,%s,%s,%s)",(title,tags,pubdate,link,thumb,author,section))
+	cur.execute("INSERT INTO elly_elly (title, tags, pubdate, link, thumb, author, section, socialhed) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)",(title,tags,pubdate,link,thumb,author,section,socialhed))
 	i=i+1
 
 cur.execute("DELETE FROM elly_elly WHERE id NOT IN (SELECT min(id) FROM elly_elly GROUP BY link)")

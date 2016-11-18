@@ -107,7 +107,9 @@ def posttweets(request):
 		listtitles = []
 		for element in postids:
 			objetoelly = Elly.objects.get(id=element)
-			titulo = objetoelly.title
+			titulo = objetoelly.socialhed
+			if titulo == "":
+				titulo = objetoelly.title
 			titulo = titulo.encode('utf8')
 			titulo = urllib.quote(titulo,safe= "")
 			link = objetoelly.link
@@ -142,14 +144,6 @@ def rts(request):
 		respostarts = urllib2.urlopen(urlrts)
 		rts = json.load(respostarts)['data'][0]['tw']
 		return HttpResponse(rts)
-
-def pubdate(request):
-	if request.method == "POST":
-		urlitem = request.body		
-		urlpubdate = "http://api.parsely.com/v2/analytics/post/detail?apikey="+apikey+"&secret="+token+"&url="+urlitem
-		respostapubdates = urllib2.urlopen(urlpubdate)
-		pubdate = json.load(respostapubdates)['data'][0]['pub_date']
-		return HttpResponse(pubdate)
 
 def filter (request):
 	if request.method == "GET":
