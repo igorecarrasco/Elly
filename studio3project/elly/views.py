@@ -86,18 +86,33 @@ def posttweets(request):
 		resource_owner_key,
 		resource_owner_secret,
 		signature_type='auth_header')
-	now = datetime.datetime.now()
-	enddate=now+timedelta(days=2)
+	
 	if request.method == "POST":
 		postids = request.POST.getlist('postid','')
+		schedtype = request.POST.get('schedtype','')
+		if schedtype == 'optimize':
+			schedtime = request.POST.get('schedtime','')
+			schedtime = int(schedtime)
+			now = datetime.datetime.now()
+			startdate = now.strftime("%Y-%m-%d %H:%M:%S")
+			enddate=now+timedelta(hours=schedtime)
+			enddate = enddate.strftime("%Y-%m-%d %H:%M:%S")
+			print enddate
+			print type(enddate)
+			optimizestartdate = "&optimize_start_date="+startdate
+			optimizeenddate = "&optimize_end_date="+enddate
+		else:
+			optimizestartdate= ""
+			optimizeenddate=""
 		listtitles = []
 		for element in postids:
 			objetoelly = Elly.objects.get(id=element)
 			titulo = objetoelly.title
 			titulo = urllib.quote(titulo,safe= "")
 			link = objetoelly.link
+			urltwit = "https://api.socialflow.com/message/add?service_user_id="+suid+"&account_type=twitter&message="+titulo+" "+link+"&publish_option="+schedtype+optimizestartdate+optimizeenddate+"&shorten_links=1"
 			listtitles.append(objetoelly.title)
-			urltwit = "https://api.socialflow.com/message/add?service_user_id="+suid+"&account_type=twitter&message="+titulo+" "+link+"&publish_option=hold&shorten_links=1"
+			print urltwit
 			r = oauth.get(urltwit)
 	template = loader.get_template('elly/rssfeed.html')
 	context = {'listtitles':listtitles,}

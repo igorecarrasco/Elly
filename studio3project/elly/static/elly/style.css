@@ -104,11 +104,12 @@ ul {
 	padding:0;
 	margin:0;
 }
-
-#submitbox {
+.rightbox {
 	position:fixed;
 	top:50vh;
 	right:20px;
+}
+#submitbox {
 	font-family: Arial;
 	border:none;
 	color: #ffffff;
@@ -144,4 +145,13 @@ ul {
 #searchbox:hover {
 	background: #c9c9c9;
 	text-decoration: none;
+}
+.reveal-if-active {
+  display:none;
+}
+#optimizefield {
+
+}
+#optimizefield:checked ~ .reveal-if-active {
+  display:inline;
 }
