@@ -9,21 +9,18 @@ form {
 	display:inline;
 }
 .ellybox {
-	border-radius:3px;
+	border-radius:1px;
+	border:1px solid #ccc;
+	margin-bottom:2px;
 	position:relative;
 	top:40px;
 	background-color:white;
 	width:775px;
-	height:100px;
-	left: 20px;
-	margin-top:10px;
-	margin-bottom:10px;
-	padding:5px;
+	height:75px;
+	left:20px;
+	padding:3px;
 	font-family: sans-serif;
 	font-weight:300;
-	-webkit-box-shadow: 1px 1px 4px 1px #bbb;
-	-moz-box-shadow: 1px 1px 4px 1px #bbb;
-	box-shadow: 1px 1px 4px 1px #bbb;
 	display:flex;
 	align-items: center;
 }
@@ -87,6 +84,9 @@ form {
 .stats {
 	margin-left:20px;
 	font-size:13px;
+}
+.stats > p {
+	margin:2px 0px 2px 0px;
 }
 .published {
 	font-size:13px;
