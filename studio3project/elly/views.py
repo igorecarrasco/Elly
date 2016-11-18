@@ -18,6 +18,9 @@ from requests_oauthlib import OAuth1Session, OAuth1
 from django.core.urlresolvers import reverse
 from django.contrib.postgres.search import SearchVector
 import requests
+import datetime
+from datetime import timedelta
+
 
 dotenv_path = join(dirname(__file__),'..','..','.env')
 load_dotenv(dotenv_path)
@@ -83,6 +86,8 @@ def posttweets(request):
 		resource_owner_key,
 		resource_owner_secret,
 		signature_type='auth_header')
+	now = datetime.datetime.now()
+	enddate=now+timedelta(days=2)
 	if request.method == "POST":
 		postids = request.POST.getlist('postid','')
 		listtitles = []

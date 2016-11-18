@@ -27,10 +27,9 @@ form {
 	align-items: center;
 }
 .writtentodb {
-	top:40px;
-	height:100px;
-	margin-top:10px;
-	margin-bottom:10px;
+	font-family: sans-serif;
+	position:relative;
+	margin-top:70px;
 }
 .title {
 	width:280px;
