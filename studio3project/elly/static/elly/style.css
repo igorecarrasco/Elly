@@ -15,7 +15,7 @@ form {
 	position:relative;
 	top:40px;
 	background-color:white;
-	width:775px;
+	width:750px;
 	height:75px;
 	left:20px;
 	padding:3px;
@@ -35,12 +35,12 @@ form {
 	margin:0px 10px 0px 10px;
 }
 .author {
-	width:130px;
-	margin:0px 10px 0px 10px;
+	width:120px;
+	margin-top:15px;
 	font-size:14px;
 	overflow:scroll;
 	height:35px;
-	margin-top:11px;
+	border:none;
 }
 .views {
 	width:90px;

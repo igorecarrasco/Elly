@@ -8,7 +8,6 @@ import urllib2
 import oauth2
 import json
 import psycopg2
-from pprint import pprint
 import os
 from os.path import join,dirname
 from dotenv import load_dotenv
