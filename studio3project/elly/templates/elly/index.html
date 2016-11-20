@@ -31,17 +31,19 @@
 				</select>
 				<input type="submit" value="Filter" id=filterbox>
 			</form>
+			<form action="/elly/postsocial">
+			</form>
 			<form action="/elly/search" method="get">
 				<input type="text" name="search" size="25">
 				<input type="submit" value="Search" id=searchbox>
 			</form>
 		</div>
 		<div class=ellylogo>
-			<a href= {% url 'login' %}><img width=150px src= {% static "elly/ellylogo.png" %}></img></a>
+			<a href= {% url 'lister' %}><img width=150px src= {% static "elly/ellylogo.png" %}></img></a>
 		</div>
 		<ul>
 			{% if elly_list %}
-			<form action="/elly/posttweets" method="post" id=posttweets>
+			<form action="/elly/postsocial" method="post" id=postsocial>
 			{% csrf_token %}
 				{% for id in elly_list %}
 				<li>
@@ -68,6 +70,8 @@
 				</li>
 				{% endfor %}
 				<div class=rightbox>
+					<select name="accountselector" id="socialselector">
+					</select>
 	    			<input id=submitbox type="submit" value="Submit Posts"><br>
 	    			<input type="radio" name="schedtype" value="hold">Hold</input>
 					<input type="radio" name="schedtype" value="optimize" id=optimizefield>Optimize</input>
@@ -84,6 +88,7 @@
 		    {% endif %}
 		</ul>
 	</body>
+	<script src= {% static "elly/socialselector.js" %}></script>
 	<script src= {% static "elly/hits.js" %}></script>
 	<script src= {% static "elly/style.js" %}></script>
 </html>

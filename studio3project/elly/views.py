@@ -28,17 +28,14 @@ token = os.getenv('parselytoken')
 apikey= os.getenv('parselyapikey')
 ckey = os.getenv('ckeysf')
 csecret = os.getenv('csecretsf')
-suid = os.getenv('serviceuserid')
+# suid = os.getenv('serviceuserid')
 
 access_token_url = 'https://www.socialflow.com/oauth/access_token'
 base_authorization_url = 'https://www.socialflow.com/oauth/authorize'
 
-# print 'Please go her and authorize', authorize_url
-# verifier = raw_input('Plaese input the verifier')
-
 def login(request):
 	#first steps of oauth1 login
-	urlcallback = request.build_absolute_uri(reverse('lister'))
+	urlcallback = request.build_absolute_uri(reverse('login2'))
 	request_token_url = 'https://www.socialflow.com/oauth/request_token'+ '?oauth_callback=' + urlcallback
 	oauth = OAuth1Session(ckey, client_secret=csecret)
 	fetch_response = oauth.fetch_request_token(request_token_url)
@@ -51,26 +48,13 @@ def login(request):
 	#drive user to lister view, where rest of authorization can take place
 	return HttpResponseRedirect(authorize_url)
 
-def lister(request):
-	#process taking on from where we left off on index
+def login2(request):
+	urlcallback = request.build_absolute_uri(reverse('lister'))
 	verifier = request.GET.get('oauth_verifier')
 	request.session['verifier'] = verifier
 	resource_owner_key = request.GET.get('oauth_token')
 	request.session['resource_owner_key'] = resource_owner_key
-	elly_list = Elly.objects.order_by('-id')
-	template = loader.get_template('elly/index.html')
-	context = {'elly_list': elly_list,}
-	return HttpResponse(template.render(context,request))
-
-def socialflow(request):
-	urlsocialflow = "https://api.socialflow.com/feed/list?account_type=twitter&limit=3&service_user_id="+suid
-	r = oauth.get(urlsocialflow)
-	return HttpResponse(r)
-
-def posttweets(request):
 	resource_owner_secret = request.session['resource_owner_secret']
-	verifier = request.session['verifier']
-	resource_owner_key = request.session['resource_owner_key']
 	oauth = OAuth1Session(ckey,
 		client_secret=csecret,
 		resource_owner_key=resource_owner_key,
@@ -81,15 +65,43 @@ def posttweets(request):
 	resource_owner_secret = oauth_tokens.get('oauth_token_secret')
 	request.session['resource_owner_key'] = resource_owner_key
 	request.session['resource_owner_secret'] = resource_owner_secret
+	return HttpResponseRedirect(urlcallback)
+
+def lister(request):
+	elly_list = Elly.objects.order_by('-id')
+	template = loader.get_template('elly/index.html')
+	context = {'elly_list': elly_list,}
+	return HttpResponse(template.render(context,request))
+
+def socialflow(request):
+	resource_owner_secret = request.session['resource_owner_secret']
+	verifier = request.session['verifier']
+	resource_owner_key = request.session['resource_owner_key']
 	headeroauth = OAuth1(ckey,
 		csecret,
 		resource_owner_key,
 		resource_owner_secret,
 		signature_type='auth_header')
-	
+	urlsocialflow = "https://api.socialflow.com/account/list?&account_type=twitter,facebook_page&limit=5"
+	r = requests.get(urlsocialflow,auth=headeroauth)
+	return HttpResponse(r)
+
+def postsocial(request):
+	resource_owner_secret = request.session['resource_owner_secret']
+	verifier = request.session['verifier']
+	resource_owner_key = request.session['resource_owner_key']
+	headeroauth = OAuth1(ckey,
+		csecret,
+		resource_owner_key,
+		resource_owner_secret,
+		signature_type='auth_header')
 	if request.method == "POST":
 		postids = request.POST.getlist('postid','')
 		schedtype = request.POST.get('schedtype','')
+		account = request.POST.get('accountselector','')
+		accountdata = account.replace(' ','').split(',')
+		socialtype = accountdata[0]
+		suid = accountdata[1]
 		if schedtype == 'optimize':
 			schedtime = request.POST.get('schedtime','')
 			schedtime = int(schedtime)
@@ -113,14 +125,14 @@ def posttweets(request):
 			titulo = titulo.encode('utf8')
 			titulo = urllib.quote(titulo,safe= "")
 			link = objetoelly.link
-			urltwit = "https://api.socialflow.com/message/add?service_user_id="+suid+"&account_type=twitter&message="+titulo+" "+link+"&publish_option="+schedtype+optimizestartdate+optimizeenddate+"&shorten_links=1"
+			urltwit = "https://api.socialflow.com/message/add?service_user_id="+suid+"&account_type="+socialtype+"&message="+titulo+" "+link+"&publish_option="+schedtype+optimizestartdate+optimizeenddate+"&shorten_links=1"
 			listtitles.append(objetoelly.title)
-			print urltwit
-			r = oauth.get(urltwit)
+			r = requests.get(urltwit,auth=headeroauth)
 	template = loader.get_template('elly/rssfeed.html')
 	context = {'listtitles':listtitles,}
   	return HttpResponse(template.render(context,request))
 
+# Start of views related to loading analytics to the lister page
 def hits(request):
 	if request.method == "POST":
 		urlitem = request.body
@@ -145,6 +157,7 @@ def rts(request):
 		rts = json.load(respostarts)['data'][0]['tw']
 		return HttpResponse(rts)
 
+#start of views related to searching and sorting 
 def filter (request):
 	if request.method == "GET":
 		filteredposts = request.GET.get('filter','')
@@ -152,7 +165,6 @@ def filter (request):
 		template = loader.get_template('elly/index.html')
 		context = {'elly_list': filtered_list,}
 		return HttpResponse(template.render(context,request))
-		
 
 def search (request):
 	if request.method == "GET":

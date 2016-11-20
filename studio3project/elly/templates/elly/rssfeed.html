@@ -15,11 +15,11 @@
 			<span>Elly</span>
 		</div>
 		<div class=ellylogo>
-			<a href= {% url 'login' %}><img width=150px src= {% static "elly/ellylogo.png" %}></img></a>
+			<a href= {% url 'lister' %}><img width=150px src= {% static "elly/ellylogo.png" %}></img></a>
 		</div>
 		<div class=writtentodb>Wrote stories below to SocialFlow queue:</div>
 		{% for object in listtitles %}
 		<div class=ellybox>{{ object }}</div>
 		{% endfor %}
-		<p class=writtentodb><a href= {% url 'login' %}>Click here to get back to story list</a></p>
+		<p class=writtentodb><a href= {% url 'lister' %}>Click here to get back to story list</a></p>
 	</body>
