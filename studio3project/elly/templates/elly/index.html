@@ -45,6 +45,21 @@
 			{% if elly_list %}
 			<form action="/elly/postsocial" method="post" id=postsocial>
 			{% csrf_token %}
+							<div class=rightbox>
+					<select name="accountselector" id="socialselector">
+					</select>
+	    			<input id=submitbox type="submit" value="Submit Posts"><br>
+	    			<input type="radio" name="schedtype" value="hold" class="holdfield"><label for="holdfield" class="holdfield">Hold</label></input>
+					<input type="radio" name="schedtype" value="optimize" class="optimizefield"><label for="optimizefield" class="optimizefield">Optimize</label></input>
+					<input type="radio" name="schedtype" value="schedule" class="schedulefield"><label for="schedulefield" class="schedulefield">Schedule</label></input>
+					<input type="radio" name="schedtype" value="publish now" class="publishfield"><label for="publishfield" class="publishfield">Publish Now</label></input>
+				<br>
+					<select name="schedtime" class="reveal-if-active">
+						<option value="48">48h</option>
+						<option value="24">24h</option>
+						<option value="2">2h</option>
+					</select>
+					</div>
 				{% for id in elly_list %}
 				<li>
 					<div class=ellybox>
@@ -69,26 +84,13 @@
 					</div>
 				</li>
 				{% endfor %}
-				<div class=rightbox>
-					<select name="accountselector" id="socialselector">
-					</select>
-	    			<input id=submitbox type="submit" value="Submit Posts"><br>
-	    			<input type="radio" name="schedtype" value="hold">Hold</input>
-					<input type="radio" name="schedtype" value="optimize" id=optimizefield>Optimize</input>
-				<br>
-					<select name="schedtime" class="reveal-if-active">
-						<option value="48">48h</option>
-						<option value="24">24h</option>
-						<option value="2">2h</option>
-					</select>
-    			</div>
 			</form>
 			{% else %}
 		    <p class=error>Error: No articles found!</p>
 		    {% endif %}
 		</ul>
+		<script src= {% static "elly/socialselector.js" %}></script>
+		<script src= {% static "elly/style.js" %}></script>
+		<script src= {% static "elly/hits.js" %}></script>
 	</body>
-	<script src= {% static "elly/socialselector.js" %}></script>
-	<script src= {% static "elly/hits.js" %}></script>
-	<script src= {% static "elly/style.js" %}></script>
 </html>

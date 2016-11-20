@@ -1,3 +1,12 @@
+$(window).load(function(){
+                        var selectorstate = $('#socialselector').val()
+                        var socialstate = selectorstate.split(",")
+                        if (socialstate[0] == 'facebook_page') {
+                                                          $( ".optimizefield" ).hide();
+                                              } else if (socialstate[0] == 'twitter') {
+                                                          $( ".optimizefield" ).show();
+                                              }
+});
 $('.checkbox').change(function(){ 
                         var selectorstate = $('#socialselector').val()
                         var socialstate = selectorstate.split(",")
@@ -41,10 +50,12 @@ $('#socialselector').change(function(){
                                   var styles = {
                                   background : '#6d84b4'
                                   };
+                                  $( ".optimizefield" ).hide();
                       } else if (socialstate[0] == 'twitter') {
                                   var styles = {
                                   background : '#95D7F9',
                                   };
+                                  $( ".optimizefield" ).show();
                       }
                         else if (socialstate[0] == 'linked_in_page') {
                                   var styles = {

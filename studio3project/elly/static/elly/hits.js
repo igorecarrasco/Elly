@@ -17,6 +17,8 @@ var csrftoken = getCookie('csrftoken');
 
 var linkItems = $(".hits").length
 
+$(document).ready(function(){
+
 $('.hits').each(function(linkItems){
 	var $elemento = $(this);
 	$.post({
@@ -57,4 +59,5 @@ $('.rts').each(function(linkItems){
 	function hitsCallback(data){
 		$elemento.append(data)
 	}
+});
 });

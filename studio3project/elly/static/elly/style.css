@@ -152,9 +152,9 @@ ul {
 .reveal-if-active {
   display:none;
 }
-#optimizefield {
+.optimizefield {
 
 }
-#optimizefield:checked ~ .reveal-if-active {
+.optimizefield:checked ~ .reveal-if-active {
   display:inline;
 }
