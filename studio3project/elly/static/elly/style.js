@@ -5,7 +5,7 @@ $('.checkbox').change(function(){
                                 if(this.checked) {
                                   if (socialstate[0] == 'facebook_page') {
                                   var styles = {
-                                  background : '#8b9dc3'
+                                  background : '#6d84b4'
                                   };
                                 } else if (socialstate[0] == 'twitter') {
                                   var styles = {
@@ -39,7 +39,7 @@ $('#socialselector').change(function(){
 
                         if (socialstate[0] == 'facebook_page') {
                                   var styles = {
-                                  background : '#8b9dc3'
+                                  background : '#6d84b4'
                                   };
                       } else if (socialstate[0] == 'twitter') {
                                   var styles = {
