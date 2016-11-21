@@ -32,7 +32,6 @@ $('.checkbox').change(function(){
                       $(this).parent('.ellybox').css( styles );
                 }
 });
-
 $('#socialselector').change(function(){
                         var selectorstate = $('#socialselector').val()
                         var socialstate = selectorstate.split(",")
@@ -61,12 +60,7 @@ $('#socialselector').change(function(){
                       }
                       elemento.parent('.ellybox').css( styles );
                     });
-$(window).load(function(){
-                        var selectorstate = $('#socialselector').val()
-                        var socialstate = selectorstate.split(",");
-                        if (socialstate[0] == 'facebook_page') {
-                                                          $( ".optimizefield" ).hide();
-                                              } else if (socialstate[0] == 'twitter') {
-                                                          $( ".optimizefield" ).show();
-                                              }
+$(document).ready(function(){
+  $('#startoptimization').AnyTime_picker( "field1",
+    { format: "%W, %M %D in the Year %z %E", firstDOW: 1 } );
 });

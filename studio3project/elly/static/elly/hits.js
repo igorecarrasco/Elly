@@ -17,7 +17,7 @@ var csrftoken = getCookie('csrftoken');
 
 var linkItems = $(".hits").length
 
-$(document).ready(function(){
+$(window).on('load',(function(){
 
 $('.hits').each(function(linkItems){
 	var $elemento = $(this);
@@ -60,4 +60,4 @@ $('.rts').each(function(linkItems){
 		$elemento.append(data)
 	}
 });
-});
+}));

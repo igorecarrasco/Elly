@@ -105,12 +105,12 @@ def postsocial(request):
 		if schedtype == 'optimize':
 			schedtime = request.POST.get('schedtime','')
 			schedtime = int(schedtime)
-			now = datetime.datetime.now()
-			startdate = now.strftime("%Y-%m-%d %H:%M:%S")
-			enddate=now+timedelta(hours=schedtime)
+			# now = datetime.datetime.now()
+			# startdate = now.strftime("%Y-%m-%d %H:%M:%S")
+			startdate = request.POST.get('startoptdatetime','')
+			startdatedt = datetime.datetime.strptime(startdate,"%Y-%m-%d %H:%M:%S")
+			enddate=startdatedt+timedelta(hours=schedtime)
 			enddate = enddate.strftime("%Y-%m-%d %H:%M:%S")
-			print enddate
-			print type(enddate)
 			optimizestartdate = "&optimize_start_date="+startdate
 			optimizeenddate = "&optimize_end_date="+enddate
 		else:
