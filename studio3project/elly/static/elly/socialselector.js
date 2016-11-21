@@ -11,10 +11,12 @@ $(document).ready(function(){
 			var accounts = client_services[object].account_type;
 			var userserviceid = client_services[object].service_user_id;
 			if (accounts == "facebook_page") {
-				$("#socialselector").append("<option class=socialselector value='facebook_page,"+userserviceid+"'>Send to Facebook</option>")
+				var accname = client_services[object].name
+				$("#socialselector").append("<option class=socialselector value='facebook_page,"+userserviceid+"'>Send to Facebook: "+accname+"</option>")
 			}
 			else if (accounts == "twitter"){
-				$("#socialselector").append("<option class=socialselector value='twitter,"+userserviceid+"'>Send to Twitter</option>")
+				var screenname = client_services[object].screen_name;
+				$("#socialselector").append("<option class=socialselector value='twitter,"+userserviceid+"'>Send to Twitter: "+screenname+"</option>")
 			}
 			else if (accounts == "google_plus_page"){
 				$("#socialselector").append("<option class=socialselector value='google_plus_page,"+userserviceid+"'>Send to Google+</option>")
