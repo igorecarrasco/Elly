@@ -125,9 +125,9 @@ def postsocial(request):
 			titulo = objetoelly.socialhed
 			if titulo == "":
 				titulo = objetoelly.title
-			if objetoelly.section == "Opinion":
-				titulo.append("via @WSJOpinion")
 			titulo = titulo.encode('utf8')
+			if objetoelly.section == "Opinion":
+				titulo = titulo+" via @WSJOpinion"
 			titulo = urllib.quote(titulo,safe= "")
 			link = objetoelly.link
 			urltwit = "https://api.socialflow.com/message/add?service_user_id="+suid+"&account_type="+socialtype+"&message="+titulo+" "+link+"&publish_option="+schedtype+scheduledt+optimizestartdate+optimizeenddate+"&shorten_links=1"

@@ -54,21 +54,25 @@ $('#socialselector').change(function(){
                                   background : '#0077b5',
                                   };
                                   $( ".optimizefield" ).show();
-
                       }
                       else if (socialstate[0] == 'google_plus_page') {
                                   var styles = {
                                   background : '#d34836',
                                   };
-                                  $( ".optimizefield" ).show();                                  
+                                  $( ".optimizefield" ).show();  
                       }
                       elemento.parent('.ellybox').css( styles );
                     });
 $(document).ready(function(){
   $('#startoptimization').AnyTime_picker( "field1",
     { format: "%W, %M %D in the Year %z %E", firstDOW: 1 } );
-});
-$(document).ready(function(){
-  $('#scheduletime').AnyTime_picker( "field1",
+    $('#scheduletime').AnyTime_picker( "field1",
     { format: "%W, %M %D in the Year %z %E", firstDOW: 1 } );
 });
+
+// if ($(".optimizefield").is(":not(:checked)")){
+//   $('reveal-if-active').hide();
+// }
+// else {
+//   $('reveal-if-active').show();
+// }
