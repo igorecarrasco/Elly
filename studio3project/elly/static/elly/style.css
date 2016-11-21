@@ -158,3 +158,13 @@ ul {
 .optimizefield:checked ~ .reveal-if-active {
   display:inline;
 }
+
+.reveal-if-active2 {
+  display:none;
+}
+.optimizefield {
+
+}
+.schedulefield:checked ~ .reveal-if-active2 {
+  display:inline;
+}

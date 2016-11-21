@@ -13,6 +13,7 @@ $(document).ready(function(){
 			if (accounts == "facebook_page") {
 				var accname = client_services[object].name
 				$("#socialselector").append("<option class=socialselector value='facebook_page,"+userserviceid+"'>Send to Facebook: "+accname+"</option>")
+				$( ".optimizefield" ).hide();
 			}
 			else if (accounts == "twitter"){
 				var screenname = client_services[object].screen_name;
@@ -26,4 +27,4 @@ $(document).ready(function(){
 			}			
 			}
 	}
-})
+});

@@ -42,6 +42,7 @@ $('#socialselector').change(function(){
                                   background : '#6d84b4'
                                   };
                                   $( ".optimizefield" ).hide();
+                                  $( ".reveal-if-active").hide();
                       } else if (socialstate[0] == 'twitter') {
                                   var styles = {
                                   background : '#95D7F9',
@@ -52,15 +53,22 @@ $('#socialselector').change(function(){
                                   var styles = {
                                   background : '#0077b5',
                                   };
+                                  $( ".optimizefield" ).show();
+
                       }
                       else if (socialstate[0] == 'google_plus_page') {
                                   var styles = {
                                   background : '#d34836',
                                   };
+                                  $( ".optimizefield" ).show();                                  
                       }
                       elemento.parent('.ellybox').css( styles );
                     });
 $(document).ready(function(){
   $('#startoptimization').AnyTime_picker( "field1",
+    { format: "%W, %M %D in the Year %z %E", firstDOW: 1 } );
+});
+$(document).ready(function(){
+  $('#scheduletime').AnyTime_picker( "field1",
     { format: "%W, %M %D in the Year %z %E", firstDOW: 1 } );
 });

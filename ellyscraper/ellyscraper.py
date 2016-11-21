@@ -294,6 +294,93 @@ for element in lifelimpa1:
 for element in lifelista:
 	novalista.append(element)
 
+#Arts section
+sectioncall = 'http://api.parsely.com/v2/analytics/section/Arts/detail?apikey='+apikey+'&secret='+token+'&days=3&limit=10'
+response = urllib2.urlopen(sectioncall)
+dados = json.load(response)['data']
+
+lifelimpa1 = []
+i=0
+while i<len(dados):
+	title=dados[i]['title']
+	tags=[]
+	a=0
+	while a<len(dados[i]['tags']): 
+		tags.append(dados[i]['tags'][a])
+		a=a+1
+	pubdate=dados[i]['pub_date']
+	link=dados[i]['link']
+	thumb=dados[i]['image_url']
+	authors=[]
+	b=0
+	while b<len(dados[i]['authors']): 
+		authors.append(dados[i]['authors'][b])
+		b=b+1
+	section=dados[i]['section']
+	lifelimpa1.append([title , tags , pubdate , link, thumb, authors, section])
+	i=i+1
+
+#life - 48h
+sectioncall = 'http://api.parsely.com/v2/analytics/section/Arts/detail?apikey='+apikey+'&secret='+token+'&days=2&limit=10'
+response = urllib2.urlopen(sectioncall)
+dados = json.load(response)['data']
+
+lifelimpa2 = []
+i=0
+while i<len(dados):
+	title=dados[i]['title']
+	tags=[]
+	a=0
+	while a<len(dados[i]['tags']): 
+		tags.append(dados[i]['tags'][a])
+		a=a+1
+	pubdate=dados[i]['pub_date']
+	link=dados[i]['link']
+	thumb=dados[i]['image_url']
+	authors=[]
+	b=0
+	while b<len(dados[i]['authors']): 
+		authors.append(dados[i]['authors'][b])
+		b=b+1
+	section=dados[i]['section']
+	lifelimpa2.append([title , tags , pubdate , link, thumb, authors, section])
+	i=i+1
+
+#for 24h
+sectioncall = 'http://api.parsely.com/v2/analytics/section/Arts/detail?apikey='+apikey+'&secret='+token+'&days=1&limit=10'
+response = urllib2.urlopen(sectioncall)
+dados = json.load(response)['data']
+
+lifelimpa3 = []
+i=0
+while i<len(dados):
+	title=dados[i]['title']
+	tags=[]
+	a=0
+	while a<len(dados[i]['tags']): 
+		tags.append(dados[i]['tags'][a])
+		a=a+1
+	pubdate=dados[i]['pub_date']
+	link=dados[i]['link']
+	thumb=dados[i]['image_url']
+	authors=[]
+	b=0
+	while b<len(dados[i]['authors']): 
+		authors.append(dados[i]['authors'][b])
+		b=b+1
+	section=dados[i]['section']
+	lifelimpa3.append([title , tags , pubdate , link, thumb, authors, section])
+	i=i+1
+
+lifelista =[]
+for element in lifelimpa1:
+	if element in lifelimpa2:
+		if element in lifelimpa3:
+			lifelista.append(element)
+
+for element in lifelista:
+	novalista.append(element)
+
 i=0
 while i<len(novalista):
 	urllink=novalista[i][3]

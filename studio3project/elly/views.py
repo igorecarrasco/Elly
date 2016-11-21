@@ -102,6 +102,9 @@ def postsocial(request):
 		accountdata = account.replace(' ','').split(',')
 		socialtype = accountdata[0]
 		suid = accountdata[1]
+		optimizestartdate=""
+		optimizeenddate=""
+		scheduledt=""
 		if schedtype == 'optimize':
 			schedtime = request.POST.get('schedtime','')
 			schedtime = int(schedtime)
@@ -113,19 +116,21 @@ def postsocial(request):
 			enddate = enddate.strftime("%Y-%m-%d %H:%M:%S")
 			optimizestartdate = "&optimize_start_date="+startdate
 			optimizeenddate = "&optimize_end_date="+enddate
-		else:
-			optimizestartdate= ""
-			optimizeenddate=""
+		elif schedtype == 'schedule':
+			scheddatetime = request.POST.get('scheduletime','')
+			scheduledt = "&scheduled_date="+scheddatetime
 		listtitles = []
 		for element in postids:
 			objetoelly = Elly.objects.get(id=element)
 			titulo = objetoelly.socialhed
 			if titulo == "":
 				titulo = objetoelly.title
+			if objetoelly.section == "Opinion":
+				titulo.append("via @WSJOpinion")
 			titulo = titulo.encode('utf8')
 			titulo = urllib.quote(titulo,safe= "")
 			link = objetoelly.link
-			urltwit = "https://api.socialflow.com/message/add?service_user_id="+suid+"&account_type="+socialtype+"&message="+titulo+" "+link+"&publish_option="+schedtype+optimizestartdate+optimizeenddate+"&shorten_links=1"
+			urltwit = "https://api.socialflow.com/message/add?service_user_id="+suid+"&account_type="+socialtype+"&message="+titulo+" "+link+"&publish_option="+schedtype+scheduledt+optimizestartdate+optimizeenddate+"&shorten_links=1"
 			listtitles.append(objetoelly.title)
 			r = requests.get(urltwit,auth=headeroauth)
 	template = loader.get_template('elly/rssfeed.html')

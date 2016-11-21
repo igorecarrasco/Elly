@@ -63,7 +63,9 @@
 						<option value="24">24h</option>
 						<option value="2">2h</option>
 					</select>
-					<p class="reveal-if-active">Start Optimization: <input name="startoptdatetime" type="text" id="startoptimization"></p>
+					<p class="reveal-if-active">Start Optimization: <input name="startoptdatetime" type="text" id="startoptimization">
+					</p>
+					<p class="reveal-if-active2">Schedule For: <input name="scheduletime" type="text" id="scheduletime"></p>
 				</div>
 			<!-- end box of submit & parameters -->
 			<!-- start list of articles -->
@@ -87,7 +89,7 @@
 								<p><img width=20px src= {% static "elly/like.png" %}> <span class=likes href='{{ id.link }}'> </span></p>
 								<p><img width=18px src= {% static "elly/twitter.png" %}>&nbsp; <span class=rts href='{{ id.link }}'> </span></p>
 							</span>
-						</input>
+						<p>
 					</div>
 				</li>
 				{% endfor %}
