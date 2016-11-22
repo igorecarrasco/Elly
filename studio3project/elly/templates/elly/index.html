@@ -9,10 +9,8 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 		<link href="https://fonts.googleapis.com/css?family=Nova+Mono" rel="stylesheet">
 		<link rel="stylesheet" href= {% static 'elly/anytime.css' %}>
-		<script src= {% static 'elly/anytime.js' %}></script>
-
+		<script src= {% static 'elly/plugins.js' %}></script>
 	</head>
-
 	<body>
 		<div class=header>
 			<span>Elly</span>
@@ -101,12 +99,6 @@
 		    <p class=error>Error: No articles found!</p>
 		    {% endif %}
 		</ul>
-		<!-- load js  -->
-		<!-- load script that modifies aesthetic -->
-		<script src= {% static "elly/style.js" %}></script>
-		<!-- load script that populates anaylitics fields -->
-		<script src= {% static "elly/hits.js" %}></script>
-		<!-- load script that populates available social accounts -->
-		<script src= {% static "elly/socialselector.js" %}></script>
-	</body>
+		<script src= {% static "elly/main.js" %}></script>
+ 		</body>
 </html>
