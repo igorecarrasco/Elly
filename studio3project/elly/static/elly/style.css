@@ -10,12 +10,13 @@ form {
 }
 .ellybox {
 	border-radius:1px;
-	border:1px solid #ccc;
-	margin-bottom:2px;
+	border-right:2px solid #ccc;
+	border-bottom:2px solid #ccc;
+	margin-bottom:4px;
 	position:relative;
 	top:40px;
 	background-color:white;
-	width:700px;
+	width:660px;
 	height:90px;
 	left:20px;
 	padding:3px 0px 0px 3px;

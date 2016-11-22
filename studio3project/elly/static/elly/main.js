@@ -61,28 +61,36 @@ $('.checkbox').change(function(){
 	if(this.checked) {
 		if (socialstate[0] == 'facebook_page') {
 		var styles = {
-		background : '#6d84b4'
-	};
+		background : '#6d84b4',
+		'border-right':'2px solid #eee',
+		'border-bottom':'2px solid #eee',
+			};
 	} else if (socialstate[0] == 'twitter') {
 		var styles = {
 		background : '#95D7F9',
-	};
+		'border-right':'2px solid #eee',
+		'border-bottom':'2px solid #eee',	};
 	}
 	else if (socialstate[0] == 'linked_in_page') {
 		var styles = {
 		background : '#0077b5',
+		'border-right':'2px solid #eee',
+		'border-bottom':'2px solid #eee',
 	};
 	}
 	else if (socialstate[0] == 'google_plus_page') {
 		var styles = {
 		background : '#d34836',
-	};
+		'border-right':'2px solid #eee',
+		'border-bottom':'2px solid #eee',	};
 	}
 	$(this).parent('.ellybox').css( styles );
 	}
 	else {
 		var styles = {
 		background : 'white',
+		'border-right':'2px solid #ccc',
+		'border-bottom':'2px solid #ccc',
 	};
 	$(this).parent('.ellybox').css( styles );
 	}

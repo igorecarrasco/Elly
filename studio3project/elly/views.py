@@ -38,8 +38,6 @@ class FormattedNumber(int):
 
 		if rep < 1000:
 			return str_rep
-		if rep < 10000:
-			return '%s,%s' % (str_rep[0], str_rep[1:])
 		if rep < 1000000:
 			if rep % 1000 == 0:
 				return '%dk' % (rep / 1000.0)
