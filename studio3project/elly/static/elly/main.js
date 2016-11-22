@@ -23,10 +23,10 @@ $('.pubdate').each(function(linkItems) {
 		$(this).html(text.replace('T', ' ')); 
 		var texto = $(this).html();
 		$(this).empty();
-		$(this).append(moment(texto,"YYYY/MM/DD HH:mm:ss").format('MM/DD/YYYY HH:mm'));
+		$(this).append(moment(texto,"YYYY/MM/DD HH:mm:ss").format('MM/DD/YYYY h:mm a'));
 	});
 
-$('#startoptimization').AnyTime_picker( "field1",
+	$('#startoptimization').AnyTime_picker( "field1",
 		{ format: "%W, %M %D in the Year %z %E", firstDOW: 1 } );
 
 	$('#scheduletime').AnyTime_picker( "field1",
