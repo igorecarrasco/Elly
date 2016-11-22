@@ -79,17 +79,17 @@
 							<span class=title>
 								<h6 class='section'>{{ id.section }}</h6>
 								<a href='{{ id.link }}' target="_Blank" class="link">{{ id.title }}</a>
-							</span>
-							<span class=author>
+							<p class=author>
 								<em>by {{ id.author }}</em>
+							</p>
 							</span>
-							<p class=published>Published: <span class=pubdate> {{ id.pubdate }} </span></p>
-							<span class=stats>
-								<p>Hits:<span class=hits href='{{ id.link }}'> </span></p>
-								<p><img width=20px src= {% static "elly/like.png" %}> <span class=likes href='{{ id.link }}'> </span></p>
-								<p><img width=18px src= {% static "elly/twitter.png" %}>&nbsp; <span class=rts href='{{ id.link }}'> </span></p>
-							</span>
-						<p>
+							<div class=published>Published: <span class=pubdate> {{ id.pubdate }} </span><br>
+							<div class=stats>
+								Hits:<span class=hits href='{{ id.link }}'> </span>
+								<img width=20px src= {% static "elly/like.png" %}> <span class=likes href='{{ id.link }}'> </span>
+								<img width=18px src= {% static "elly/twitter.png" %}>&nbsp; <span class=rts href='{{ id.link }}'> </span>
+							</div>
+							</div>
 					</div>
 				</li>
 				{% endfor %}
