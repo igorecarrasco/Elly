@@ -13,11 +13,6 @@ ul {
 label {
 	font-family:sans-serif;
 }
-select {
-	-webkit-border-radius:1px;
-    -moz-border-radius:1px;
-    border-radius:1px;
-}
 form {
 	display:inline;
 }
@@ -26,7 +21,6 @@ p {
 }
 .header {
 	font-family: "Delius Unicase",serif;
-	font-size: 40px;
 	color:white;
 	width:100%;
 	position: fixed;
@@ -34,17 +28,11 @@ p {
 	height: 60px;
 	z-index: 1;
 }
-.header select {
-	-webkit-border-radius:1px;
-    -moz-border-radius:1px;
-    border-radius:1px;
-    border:none;
-}
 .header div {
 	display: inline-block;
 }
 #filtering {
-	left:75px;
+	left:85px;
 	position:relative;
 	bottom:10px;
 }
@@ -56,6 +44,7 @@ p {
 	left:75px;
 }
 #logotext {
+	font-size: 40px;
 	position:relative;
 	left:75px;
 }
@@ -139,7 +128,42 @@ p {
 	width:195px;
 	font-size:13px;
 }
-
+.select-style {
+    padding: 0;
+    margin: 0;
+    width: 160px;
+    border-radius: 3px;
+    overflow: hidden;
+    background-color: #fff;
+    position:relative;
+    top:7px;
+    background: #fff url("http://www.scottgood.com/jsg/blog.nsf/images/arrowdown.gif") no-repeat 90% 50%;
+}
+.rightbox .select-style {
+	margin: 0px 0px 0px 7px;
+}
+.rightbox .select-style #socialselector {
+	padding-left:0;
+	padding-bottom:0;
+}
+.select-style select {
+    padding: 5px 8px;
+    width: 130%;
+/*    height:20px;
+*/    border: none;
+    box-shadow: none;
+    background-color: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+            appearance: none;
+}
+.select-style select:focus {
+    outline: none;
+}
+#filterform {
+	margin-right:5px;
+}
 .rightbox {
 	font-weight:300;
 	-webkit-box-shadow: 2px 2px 1px -1px rgba(0,0,0,0.50);
@@ -149,16 +173,16 @@ p {
 	position:fixed;
 	top:40vh;
 	left:700px;
-	height:215px;
+	height:255px;
 	width:175px;
 	background-color:#ccc;
-
 }
 .optimizefield {
 	margin-bottom:5px;
 }
 #socialselector {
 	width:160px;
+	margin-left:8px;
 	margin-bottom:5px;
 }
 #submitbox {
@@ -193,7 +217,7 @@ p {
 input[type='text'] {
 	-webkit-border-radius:1px;
     -moz-border-radius:1px;
-    border-radius:1px;
+    border-radius:3px;
     -webkit-appearance: none;
     background-color: white;
     resize: none;
@@ -216,17 +240,18 @@ input[type='text'] {
     display: inline-block;
     text-align: start;
     margin: 0em 0em 0em 0em;
-    padding: 3px 2px 3px 3px;
+    padding: 5px 4px 5px 6px;
     font: 11px BlinkMacSystemFont;
     -webkit-writing-mode: horizontal-tb;
-    }
+}
 #searchbox {
 	border:none;
 	color: #ffffff;
 	font-size: 10px;
 	background: #949494;
-	padding: 3px 6px 3px 6px;
 	text-decoration: none;
+	padding: 3px 6px 3px 6px;
+
 }
 #searchbox:hover {
 	background: #c9c9c9;
@@ -250,9 +275,15 @@ input[type='text'] {
 
 .reveal-if-active {
 	font-family: sans-serif;
-	margin-bottom:5px;
-
 }
 .reveal-if-active2 {
 	font-family: sans-serif;
+}
+#startoptimization {
+	margin-top:3px;
+	margin-left:7px;
+}
+#scheduletime {
+	margin-top:3px;
+	margin-left:7px;
 }

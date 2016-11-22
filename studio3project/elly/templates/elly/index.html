@@ -17,7 +17,8 @@
 			</div>
 			<div id=logotext>elly</div>
 			<div id=filtering>
-			<form action="/elly/filter" method="get">
+			<form action="/elly/filter" method="get" id="filterform">
+			<div class="select-style">
 				<select name="filter">
 					<option value="" disabled selected hidden>Section</option>
 					<option value="Opinion">Opinion</option>
@@ -33,8 +34,10 @@
 					<option value="Magazine">Magazine</option>
 					<option value="Arts">Arts</option>
 				</select>
-				<input type="submit" value="Filter" id=filterbox>
+			</div>
+			<input type="submit" value="Filter" id=filterbox>
 			</form>
+
 			<form action="/elly/search" method="get">
 				<input type="text" name="search" size="25" placeholder="Enter tag or keyword:" id="searchfield">
 				<input type="submit" value="Search" id=searchbox>
@@ -49,21 +52,25 @@
 			<!-- start box that submits posts and parameters -->
 				<div class=rightbox>
 					<input id=submitbox type="submit" value="Submit Posts">
+					<div class="select-style">
 	    			<select name="accountselector" id="socialselector">
 	    			<option value="" disabled selected hidden>Select account:</option>
-					</select><br>
+					</select>
+					</div><br>
 	    			<input type="radio" name="schedtype" value="publish now" class="publishfield"><label for="publishfield" class="publishfield">Publish Now</label><br>
 	    			<input type="radio" name="schedtype" value="hold" class="holdfield"><label for="holdfield" class="holdfield">Hold</label><br>
 					<input type="radio" name="schedtype" value="schedule" class="schedulefield"><label for="schedulefield" class="schedulefield">Schedule</label><br>
 					<input type="radio" name="schedtype" value="optimize" class="optimizefield"><label for="optimizefield" class="optimizefield">Optimize</label>
 				<br>
+				<div class="select-style">
 					<select name="schedtime" class="reveal-if-active">
 						<option value="96">96h (4 days)</option>
 						<option value="72">72h (3 days)</option>					
 						<option value="48">48h (2 days)</option>
 						<option value="24">24h (1 day)</option>
 						<option value="2">2h</option>
-					</select><br>
+					</select>
+				</div><br>
 					<span class="reveal-if-active">Start Optimization: <input name="startoptdatetime" type="text" id="startoptimization">
 					</span>
 					<span class="reveal-if-active2">Schedule For: <input name="scheduletime" type="text" id="scheduletime"></span>
