@@ -7,13 +7,16 @@
 		<title>Elly Beta 1.0</title>
 		<meta charset="UTF-8">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-		<link href="https://fonts.googleapis.com/css?family=Nova+Mono" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Delius+Unicase" rel="stylesheet">
 		<link rel="stylesheet" href= {% static 'elly/anytime.css' %}>
 		<script src= {% static 'elly/plugins.js' %}></script>
 	</head>
 	<body>
 		<div class=header>
-			<span>Elly</span>
+			<div id=ellylogo><a href= {% url 'lister' %}><img width=70px src= {% static "elly/ellylogo.png" %}></img></a>
+			</div>
+			<div id=logotext>elly</div>
+			<div id=filtering>
 			<form action="/elly/filter" method="get">
 				<select name="filter">
 					<option value="" disabled selected hidden>Section</option>
@@ -32,29 +35,26 @@
 				</select>
 				<input type="submit" value="Filter" id=filterbox>
 			</form>
-			<form action="/elly/postsocial">
-			</form>
 			<form action="/elly/search" method="get">
 				<input type="text" name="search" size="25">
 				<input type="submit" value="Search" id=searchbox>
 			</form>
+			</div>
 		</div>
-		<div class=ellylogo>
-			<a href= {% url 'lister' %}><img width=150px src= {% static "elly/ellylogo.png" %}></img></a>
-		</div>
+		<div class="ellyboxcontainer">
 		<ul>
 			{% if elly_list %}
 			<form action="/elly/postsocial" method="post" id=postsocial>
 			{% csrf_token %}
 			<!-- start box that submits posts and parameters -->
 				<div class=rightbox>
-	    			<input id=submitbox type="submit" value="Submit Posts"><br>
+					<input id=submitbox type="submit" value="Submit Posts">
 	    			<select name="accountselector" id="socialselector">
 					</select><br>
-	    			<input type="radio" name="schedtype" value="hold" class="holdfield"><label for="holdfield" class="holdfield">Hold</label></input>
-					<input type="radio" name="schedtype" value="optimize" class="optimizefield"><label for="optimizefield" class="optimizefield">Optimize</label></input>
-					<input type="radio" name="schedtype" value="schedule" class="schedulefield"><label for="schedulefield" class="schedulefield">Schedule</label></input>
-					<input type="radio" name="schedtype" value="publish now" class="publishfield"><label for="publishfield" class="publishfield">Publish Now</label></input>
+	    			<input type="radio" name="schedtype" value="publish now" class="publishfield"><label for="publishfield" class="publishfield">Publish Now</label><br>
+	    			<input type="radio" name="schedtype" value="hold" class="holdfield"><label for="holdfield" class="holdfield">Hold</label><br>
+					<input type="radio" name="schedtype" value="schedule" class="schedulefield"><label for="schedulefield" class="schedulefield">Schedule</label><br>
+					<input type="radio" name="schedtype" value="optimize" class="optimizefield"><label for="optimizefield" class="optimizefield">Optimize</label>
 				<br>
 					<select name="schedtime" class="reveal-if-active">
 						<option value="96">96h (4 days)</option>
@@ -62,10 +62,11 @@
 						<option value="48">48h (2 days)</option>
 						<option value="24">24h (1 day)</option>
 						<option value="2">2h</option>
-					</select>
-					<p class="reveal-if-active">Start Optimization: <input name="startoptdatetime" type="text" id="startoptimization">
-					</p>
-					<p class="reveal-if-active2">Schedule For: <input name="scheduletime" type="text" id="scheduletime"></p>
+					</select><br>
+					<span class="reveal-if-active">Start Optimization: <input name="startoptdatetime" type="text" id="startoptimization">
+					</span>
+					<span class="reveal-if-active2">Schedule For: <input name="scheduletime" type="text" id="scheduletime"></span>
+
 				</div>
 			<!-- end box of submit & parameters -->
 			<!-- start list of articles -->
@@ -99,6 +100,7 @@
 		    <p class=error>Error: No articles found!</p>
 		    {% endif %}
 		</ul>
+		</div>
 		<script src= {% static "elly/main.js" %}></script>
  		</body>
 </html>

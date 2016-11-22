@@ -62,35 +62,42 @@ $('.checkbox').change(function(){
 		if (socialstate[0] == 'facebook_page') {
 		var styles = {
 		background : '#6d84b4',
-		'border-right':'2px solid #eee',
-		'border-bottom':'2px solid #eee',
+		'-webkit-box-shadow': 'none',
+		'-moz-box-shadow': 'none',
+		'box-shadow': 'none', 
 			};
 	} else if (socialstate[0] == 'twitter') {
 		var styles = {
 		background : '#95D7F9',
-		'border-right':'2px solid #eee',
-		'border-bottom':'2px solid #eee',	};
+		'-webkit-box-shadow': 'none',
+		'-moz-box-shadow': 'none',
+		'box-shadow': 'none', 	
+	};
 	}
 	else if (socialstate[0] == 'linked_in_page') {
 		var styles = {
 		background : '#0077b5',
-		'border-right':'2px solid #eee',
-		'border-bottom':'2px solid #eee',
+		'-webkit-box-shadow': 'none',
+		'-moz-box-shadow': 'none',
+		'box-shadow': 'none', 
 	};
 	}
 	else if (socialstate[0] == 'google_plus_page') {
 		var styles = {
 		background : '#d34836',
-		'border-right':'2px solid #eee',
-		'border-bottom':'2px solid #eee',	};
+		'-webkit-box-shadow': 'none',
+		'-moz-box-shadow': 'none',
+		'box-shadow': 'none', 
+	};
 	}
 	$(this).parent('.ellybox').css( styles );
 	}
 	else {
 		var styles = {
 		background : 'white',
-		'border-right':'2px solid #ccc',
-		'border-bottom':'2px solid #ccc',
+		'-webkit-box-shadow': '2px 2px 1px -1px rgba(0,0,0,0.33)',
+		'-moz-box-shadow': '2px 2px 1px -1px rgba(0,0,0,0.33)',
+		'box-shadow': '2px 2px 1px -1px rgba(0,0,0,0.33)',
 	};
 	$(this).parent('.ellybox').css( styles );
 	}
@@ -170,18 +177,18 @@ $(window).one('load',(function(){
 			var userserviceid = client_services[object].service_user_id;
 			if (accounts == "facebook_page") {
 				var accname = client_services[object].name
-				$("#socialselector").append("<option class=socialselector value='facebook_page,"+userserviceid+"'>Send to Facebook: "+accname+"</option>")
+				$("#socialselector").append("<option class=socialselector value='facebook_page,"+userserviceid+"'>Facebook: "+accname+"</option>")
 				$( ".optimizefield" ).hide();
 			}
 			else if (accounts == "twitter"){
 				var screenname = client_services[object].screen_name;
-				$("#socialselector").append("<option class=socialselector value='twitter,"+userserviceid+"'>Send to Twitter: "+screenname+"</option>")
+				$("#socialselector").append("<option class=socialselector value='twitter,"+userserviceid+"'>Twitter: "+screenname+"</option>")
 			}
 			else if (accounts == "google_plus_page"){
-				$("#socialselector").append("<option class=socialselector value='google_plus_page,"+userserviceid+"'>Send to Google+</option>")
+				$("#socialselector").append("<option class=socialselector value='google_plus_page,"+userserviceid+"'>Google+</option>")
 			}
 			else if (accounts == "linked_in_page"){
-				$("#socialselector").append("<option class=socialselector value='linked_in_page,"+userserviceid+"'>Send to LinkedIn</option>")
+				$("#socialselector").append("<option class=socialselector value='linked_in_page,"+userserviceid+"'>LinkedIn</option>")
 			}			
 		}
 }

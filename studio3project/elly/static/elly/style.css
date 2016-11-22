@@ -1,17 +1,70 @@
-.section {
+body {
+	background-color:#eee;
+	margin:0px 0px 10px 0px;
+	padding:0;
+}
+ul {
+	list-style: none;
+	position:relative;
+	padding:0;
 	margin:0;
-	-webkit-margin-before:0;
-	-webkit-margin-after:5px;
-	text-transform:uppercase;
-	letter-spacing: 0.5px;
+	top:30px;
+}
+label {
+	font-family:sans-serif;
+}
+select {
+	-webkit-border-radius:1px;
+    -moz-border-radius:1px;
+    border-radius:0px;
 }
 form {
 	display:inline;
 }
+p {
+	color: #222;
+}
+.header {
+	font-family: "Delius Unicase",serif;
+	font-size: 40px;
+	color:white;
+	width:100%;
+	position: fixed;
+	background-color: black;
+	height: 60px;
+	z-index: 1;
+}
+.header select {
+	-webkit-border-radius:1px;
+    -moz-border-radius:1px;
+    border-radius:1px;
+    border:none;
+}
+.header div {
+	display: inline-block;
+}
+#filtering {
+	left:75px;
+	position:relative;
+	bottom:10px;
+}
+
+#ellylogo {
+	position:relative;
+	z-index:2;
+	top:7px;
+	left:75px;
+}
+#logotext {
+	position:relative;
+	left:75px;
+}
+
 .ellybox {
 	border-radius:1px;
-	border-right:2px solid #ccc;
-	border-bottom:2px solid #ccc;
+	-webkit-box-shadow: 2px 2px 1px -1px rgba(0,0,0,0.33);
+	-moz-box-shadow: 2px 2px 1px -1px rgba(0,0,0,0.33);
+	box-shadow: 2px 2px 1px -1px rgba(0,0,0,0.33);
 	margin-bottom:4px;
 	position:relative;
 	top:40px;
@@ -25,10 +78,23 @@ form {
 	display:flex;
 	align-items: center;
 }
-.writtentodb {
-	font-family: sans-serif;
-	position:relative;
-	margin-top:70px;
+.ellybox a:visited {
+	color:#aaa;
+}
+.ellybox a:link,a:active{
+	color:#222;
+}
+.thumbimg {
+	width:85px;
+	margin:0 10px 0 10px;
+	display: inline-block;
+}
+.section {
+	margin:0;
+	-webkit-margin-before:0;
+	-webkit-margin-after:5px;
+	text-transform:uppercase;
+	letter-spacing: 0.5px;
 }
 .title {
 	width:340px;
@@ -41,45 +107,6 @@ form {
 	height:15px;
 	overflow:scroll;
 }
-.views {
-	width:90px;
-	margin: 0px 10px 0px 10px;
-	font-size:14px;
-	text-align: center;
-}
-.thumbimg {
-	width:85px;
-	margin:0 10px 0 10px;
-	display: inline-block;
-}
-.ellybox a:visited {
-	color:#aaa;
-}
-.ellybox a:link,a:active{
-	color:#222;
-}
-.header {
-	font-family: "Nova Mono",serif;
-	font-size: 40px;
-	color:white;
-	text-align: center;
-	width:100%;
-	position: relative;
-	background-color: black;
-	height: 50px;
-	top:30px;
-	padding-bottom:10px;
-	margin-bottom:50px;
-}
-.ellylogo {
-	position:absolute;
-	top:10px;
-	left:20px;
-}
-.error {
-	margin-left:20px;
-	margin-top:100px;
-}
 .stats {
 	width:100%;
 	font-size:13px;
@@ -89,32 +116,53 @@ form {
 .stats > p {
 	margin:2px 0px 2px 0px;
 }
+.views {
+	width:90px;
+	margin: 0px 10px 0px 10px;
+	font-size:14px;
+	text-align: center;
+}
+
+.writtentodb {
+	font-family: sans-serif;
+	position:relative;
+	margin-top:70px;
+}
+
+.error {
+	margin-left:20px;
+	margin-top:100px;
+}
+
 .published {
 	margin:0;
 	width:195px;
 	font-size:13px;
 }
-p {
-	color: #222;
-}
-body {
-	background-color:#eee;
-	margin:0px 0px 10px 0px;
-	padding:0;
-}
-ul {
-	list-style: none;
-	padding:0;
-	margin:0;
-}
+
 .rightbox {
+	font-weight:300;
+	-webkit-box-shadow: 2px 2px 1px -1px rgba(0,0,0,0.50);
+	-moz-box-shadow: 2px 2px 1px -1px rgba(0,0,0,0.50);
+	box-shadow: 2px 2px 1px -1px rgba(0,0,0,0.50);
+	padding:5px;
 	position:fixed;
-	top:50vh;
-	right:20px;
+	top:40vh;
+	left:700px;
+	height:215px;
+	width:175px;
+	background-color:#ccc;
+
+}
+.optimizefield {
+	margin-bottom:5px;
+}
+#socialselector {
+	width:160px;
+	margin-bottom:5px;
 }
 #submitbox {
 	border-radius:2px;
-
 	font-family: Arial;
 	border:none;
 	color: #ffffff;
@@ -122,9 +170,12 @@ ul {
 	background: #949494;
 	padding: 10px 20px 10px 20px;
 	text-decoration: none;
+	position: absolute;
+	bottom:5px;
+	left:12.5px;
 }
 #submitbox:hover {
-	background: #c9c9c9;
+	background: #aaa;
 	text-decoration: none;
 }
 #filterbox {
@@ -150,4 +201,12 @@ ul {
 #searchbox:hover {
 	background: #c9c9c9;
 	text-decoration: none;
+}
+.reveal-if-active {
+	font-family: sans-serif;
+	margin-bottom:5px;
+
+}
+.reveal-if-active2 {
+	font-family: sans-serif;
 }
