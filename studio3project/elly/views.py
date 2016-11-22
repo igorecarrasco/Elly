@@ -21,7 +21,6 @@ import requests
 import datetime
 from datetime import timedelta
 
-
 dotenv_path = join(dirname(__file__),'..','..','.env')
 load_dotenv(dotenv_path)
 token = os.getenv('parselytoken')
@@ -32,6 +31,26 @@ csecret = os.getenv('csecretsf')
 
 access_token_url = 'https://www.socialflow.com/oauth/access_token'
 base_authorization_url = 'https://www.socialflow.com/oauth/authorize'
+
+class FormattedNumber(int):
+    def format(rep):
+		str_rep = str(rep)
+
+		if rep < 1000:
+			return str_rep
+		if rep < 10000:
+			return '%s,%s' % (str_rep[0], str_rep[1:])
+		if rep < 1000000:
+			if rep % 1000 == 0:
+				return '%dk' % (rep / 1000.0)
+			else:
+				return '%.1fk' % (rep / 1000.0)
+		else:
+			if rep % 1000 == 0:
+				return '%dm' % (rep / 100000.0)
+			else:
+				return '%.1fm' % (rep / 100000.0)
+
 
 def login(request):
 	#first steps of oauth1 login
@@ -144,6 +163,10 @@ def hits(request):
 		urlhits = "http://api.parsely.com/v2/analytics/post/detail?apikey="+apikey+"&secret="+token+"&url="+urlitem
 		respostahits = urllib2.urlopen(urlhits)
 		hits = json.load(respostahits)['data'][0]['visitors']
+		hits = FormattedNumber(hits).format()
+		hits = hits.replace(".0k","k")
+		hits = hits.replace(".0m","m")
+
 		return HttpResponse(hits)
 
 def likes(request):
@@ -152,6 +175,9 @@ def likes(request):
 		urllikes = "http://api.parsely.com/v2/shares/post/detail?apikey="+apikey+"&secret="+token+"&url="+urlitem
 		respostalikes = urllib2.urlopen(urllikes)
 		likes = json.load(respostalikes)['data'][0]['fb']
+		likes = FormattedNumber(likes).format()
+		likes = likes.replace(".0k","k")
+		likes = likes.replace(".0m","m")
 		return HttpResponse(likes)
 
 def rts(request):
@@ -160,6 +186,9 @@ def rts(request):
 		urlrts = "http://api.parsely.com/v2/shares/post/detail?apikey="+apikey+"&secret="+token+"&url="+urlitem
 		respostarts = urllib2.urlopen(urlrts)
 		rts = json.load(respostarts)['data'][0]['tw']
+		rts = FormattedNumber(rts).format()
+		rts = rts.replace(".0k","k")
+		rts = rts.replace(".0m","m")
 		return HttpResponse(rts)
 
 #start of views related to searching and sorting 
