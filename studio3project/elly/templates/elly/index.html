@@ -36,7 +36,7 @@
 				<input type="submit" value="Filter" id=filterbox>
 			</form>
 			<form action="/elly/search" method="get">
-				<input type="text" name="search" size="25">
+				<input type="text" name="search" size="25" placeholder="Enter tag or keyword:" id="searchfield">
 				<input type="submit" value="Search" id=searchbox>
 			</form>
 			</div>
@@ -50,6 +50,7 @@
 				<div class=rightbox>
 					<input id=submitbox type="submit" value="Submit Posts">
 	    			<select name="accountselector" id="socialselector">
+	    			<option value="" disabled selected hidden>Select account:</option>
 					</select><br>
 	    			<input type="radio" name="schedtype" value="publish now" class="publishfield"><label for="publishfield" class="publishfield">Publish Now</label><br>
 	    			<input type="radio" name="schedtype" value="hold" class="holdfield"><label for="holdfield" class="holdfield">Hold</label><br>
