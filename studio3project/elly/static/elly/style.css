@@ -149,22 +149,3 @@ ul {
 	background: #c9c9c9;
 	text-decoration: none;
 }
-.reveal-if-active {
-  display:none;
-}
-.optimizefield {
-
-}
-.optimizefield:checked ~ .reveal-if-active {
-  display:inline;
-}
-
-.reveal-if-active2 {
-  display:none;
-}
-.optimizefield {
-
-}
-.schedulefield:checked ~ .reveal-if-active2 {
-  display:inline;
-}
