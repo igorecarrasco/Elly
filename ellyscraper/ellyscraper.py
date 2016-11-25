@@ -9,6 +9,7 @@ import oauth2
 import json
 import psycopg2
 import os
+import datetime
 from os.path import join,dirname
 from dotenv import load_dotenv
 from BeautifulSoup import BeautifulSoup
@@ -386,17 +387,23 @@ while i<len(novalista):
 	urllink=novalista[i][3]
 	soup = BeautifulSoup(urllib2.urlopen(urllink))
 	result = soup.findAll('meta',{'name' : 'article.headline'})
-	result = result[0]['content']
+	try:
+		result = result[0]['content']
+	except IndexError:
+		result = ''
 	novalista[i].append(result)
 	i=i+1
 
-#write to the database title, tag list, published date, link, thumbnail url, author
-#in the corresponding fields
+# write to the database title, tag list, published date, link, thumbnail url, author
+# in the corresponding fields
 i=0
 while i<len(novalista):
 	title=novalista[i][0]
 	tags=novalista[i][1]
 	pubdate=novalista[i][2]
+	if pubdate == None:
+		now = datetime.datetime.now()
+		pubdate=datetime.datetime.strftime(now,"%Y-%m-%dT%H-%M-%S")
 	link=novalista[i][3]
 	thumb=novalista[i][4]
 	author=novalista[i][5]
@@ -424,6 +431,5 @@ conn.commit()
 cur.close()
 conn.close()
 
-#it worked!
+# it worked!
 print "SUCESS"
-
