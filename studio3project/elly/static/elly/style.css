@@ -25,7 +25,7 @@ p {
 	color:white;
 	width:100%;
 	position: fixed;
-	background-color: black;
+	background-color:  #096590;
 	height: 60px;
 	z-index: 1;
 }
@@ -33,16 +33,16 @@ p {
 	display: inline-block;
 }
 #filtering {
-	left:50px;
+	left:100px;
 	position:relative;
-	bottom:10px;
+	bottom:12.5px;
 }
 
 #ellylogo {
 	position:relative;
 	z-index:2;
 	top:7px;
-	left:20px;
+	left:65px;
 }
 #logotext {
 	font-size: 40px;
@@ -181,7 +181,7 @@ p {
 	left:700px;
 	height:240px;
 	width:175px;
-	background-color:#ddd;
+	background-color: #cfedfc;
 	font-size:13px;
 }
 .optimizefield {
@@ -197,7 +197,7 @@ p {
 	border:none;
 	color: #ffffff;
 	font-size: 18px;
-	background: #FDAC91;
+	background: #096590;
 	padding: 12px 24px 12px 24px;
 	text-decoration: none;
 	position: absolute;
@@ -205,7 +205,7 @@ p {
 	left:6.5px;
 }
 #submitbox:hover {
-	background: #fdb49b;
+	background: #0a74a9;
 	text-decoration: none;
 }
 #filterbox {
@@ -216,7 +216,8 @@ p {
 	color: white;
 	padding: 4px 6px 4px 6px;
 	text-decoration: none;
-	background:#aaa;
+	background:#eee;
+	color:#aaa;
 }
 #filterbox:hover {
 /*	background: #c9c9c9;
@@ -254,7 +255,7 @@ input[type='text'] {
 }
 input[type='submit']{
 	font-family:"Roboto", sans-serif;
-	font-size:13.5px;
+	font-size:12.5px;
 	text-transform:uppercase;
 }
 input[type='radio']{
@@ -267,10 +268,11 @@ input[type='radio']{
     -moz-border-radius:1px;
     border-radius:1px;
 	border:none;
-	color: white;
 	text-decoration: none;
 	padding: 4px 6px 4px 6px;
-	background:#aaa;
+	background:#eee;
+	color:#aaa;
+	margin-left:-0.75px;
 }
 #searchbox:hover {
 	/*background: #c9c9c9;*/
