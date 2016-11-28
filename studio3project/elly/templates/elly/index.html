@@ -62,8 +62,11 @@
 	    			<input type="radio" name="schedtype" value="hold" class="holdfield"><label for="holdfield" class="holdfield">Hold</label><br>
 					<input type="radio" name="schedtype" value="schedule" class="schedulefield"><label for="schedulefield" class="schedulefield">Schedule</label><br>
 					<input type="radio" name="schedtype" value="optimize" class="optimizefield"><label for="optimizefield" class="optimizefield">Optimize</label>
-				<br>
-				<div class="select-style">
+					<div class="parameters">
+					<span class="reveal-if-active2">Schedule For: <input name="scheduletime" type="text" id="scheduletime"></span>
+					<span class="reveal-if-active">Start Optimization: <input name="startoptdatetime" type="text" id="startoptimization">
+					</span>
+					<div class="select-style">
 					<select name="schedtime" class="reveal-if-active">
 						<option value="96">96h (4 days)</option>
 						<option value="72">72h (3 days)</option>					
@@ -71,11 +74,8 @@
 						<option value="24">24h (1 day)</option>
 						<option value="2">2h</option>
 					</select>
+					</div>
 				</div><br>
-					<span class="reveal-if-active">Start Optimization: <input name="startoptdatetime" type="text" id="startoptimization">
-					</span>
-					<span class="reveal-if-active2">Schedule For: <input name="scheduletime" type="text" id="scheduletime"></span>
-
 				</div>
 			<!-- end box of submit & parameters -->
 			<!-- start list of articles -->

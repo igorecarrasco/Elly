@@ -298,10 +298,11 @@ input[type='radio']{
 }
 .reveal-if-active2 {
 	font-family: sans-serif;
-
+}
+.parameters {
+	margin-top:7px;
 
 }
-
 #startoptimization {
 	margin-top:3px;
 	margin-left:7px;
