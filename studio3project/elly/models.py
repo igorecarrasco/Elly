@@ -7,7 +7,7 @@ from django.db import models
 class Elly(models.Model):
 	title = models.TextField()
 	tags = models.TextField()
-	pubdate = models.TextField()
+	pubdate = models.DateTimeField()
 	link = models.TextField()
 	thumb = models.TextField()
 	author = models.TextField()

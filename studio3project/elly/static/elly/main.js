@@ -18,14 +18,6 @@ var csrftoken = getCookie('csrftoken');
 
 $(document).ready(function(){
 var linkItems = $(".hits").length
-$('.pubdate').each(function(linkItems) {
-		var text = $(this).html();
-		$(this).html(text.replace('T', ' ')); 
-		var texto = $(this).html();
-		$(this).empty();
-		$(this).append(moment(texto,"YYYY/MM/DD HH:mm:ss").format('MM/DD/YYYY h:mm a'));
-	});
-
 	$('#startoptimization').AnyTime_picker( "field1",
 		{ format: "%W, %M %D in the Year %z %E", firstDOW: 1 } );
 

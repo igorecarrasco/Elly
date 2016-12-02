@@ -90,10 +90,10 @@
 								<h6 class='section'>{{ id.section }}</h6>
 								<a href='{{ id.link }}' target="_Blank" class="link">{{ id.title }}</a>
 							<p class=author>
-								<em>by {{ id.author }}</em>
+								<em>by {{id.author|safe}}</em>
 							</p>
 							</span>
-							<div class=published>Published: <span class=pubdate> {{ id.pubdate }} </span><br>
+							<div class=published>Published: <span class=pubdate> {{ id.pubdate|date:"d M Y - P" }} </span><br>
 							<div class=stats>
 								Hits:<span class=hits href='{{ id.link }}'> </span>
 								<img width=20px src= {% static "elly/like.png" %}> <span class=likes href='{{ id.link }}'> </span>
