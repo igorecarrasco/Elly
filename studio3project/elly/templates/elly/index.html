@@ -14,11 +14,11 @@
 	</head>
 	<body>
 		<div class=header>
-			<div id=ellylogo><a href= {% url 'lister' %}><img width=70px src= {% static "elly/ellylogo.png" %}></img></a>
+			<div id=ellylogo><a href= {% url 'index' %}><img width=70px src= {% static "elly/ellylogo.png" %}></img></a>
 			</div>
 			<!-- <div id=logotext>elly</div> -->
 			<div id=filtering>
-			<form action="/elly/filter" method="get" id="filterform">
+			<form action="/elly/index" method="get" id="filterform">
 			<div class="select-style">
 				<select name="filter">
 					<option value="" disabled selected hidden>Section</option>
@@ -39,13 +39,25 @@
 			<input type="submit" value="Filter" id=filterbox>
 			</form>
 
-			<form action="/elly/search" method="get">
+			<form action="/elly/index" method="get">
 				<input type="text" name="search" size="25" placeholder="Enter tag or keyword" id="searchfield">
 				<input type="submit" value="Search" id=searchbox>
 			</form>
 			</div>
 		</div>
 		<div class="ellyboxcontainer">
+		<div class="select-style">
+			<form action="/elly/index" method="get">
+				<select name="limitposts">
+					<option value="" disabled selected hidden>Limit posts:</option>
+					<option value="10">10</option>
+					<option value="50">50</option>
+					<option value="100">100</option>
+					<option value="150">150</option>
+				</select>
+				</div>
+				<input type="submit" value="limitposts" id=filterbox>
+			</form>
 		<ul>
 			{% if elly_list %}
 			<form action="/elly/postsocial" method="post" id=postsocial>

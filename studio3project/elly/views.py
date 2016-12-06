@@ -66,7 +66,7 @@ def login(request):
 	return HttpResponseRedirect(authorize_url)
 
 def login2(request):
-	urlcallback = request.build_absolute_uri(reverse('lister'))
+	urlcallback = request.build_absolute_uri(reverse('index'))
 	verifier = request.GET.get('oauth_verifier')
 	request.session['verifier'] = verifier
 	resource_owner_key = request.GET.get('oauth_token')
@@ -84,11 +84,34 @@ def login2(request):
 	request.session['resource_owner_secret'] = resource_owner_secret
 	return HttpResponseRedirect(urlcallback)
 
-def lister(request):
-	elly_list = Elly.objects.order_by('-id')
-	template = loader.get_template('elly/index.html')
+def index(request):
+	try:
+		limitposts = request.GET.get('limitposts')
+		elly_list = Elly.objects.order_by('-pubdate')[:limitposts]
+	except NameError:
+		elly_list = Elly.objects.order_by('-pubdate')
 	context = {'elly_list': elly_list,}
+	template = loader.get_template('elly/index.html')
 	return HttpResponse(template.render(context,request))
+
+#start of views related to searching and sorting 
+def filter (request):
+	if request.method == "GET":
+		filteredposts = request.GET.get('filter','')
+		filtered_list = Elly.objects.filter(section=filteredposts)
+		template = loader.get_template('elly/index.html')
+		context = {'elly_list': filtered_list,}
+		return HttpResponse(template.render(context,request))
+
+def search (request):
+	if request.method == "GET":
+		searchobject = request.GET.get('search','')
+		searched_list = Elly.objects.annotate(search=SearchVector('tags', 'title'),
+			).filter(search=searchobject)
+		print searched_list
+		template = loader.get_template('elly/index.html')
+		context = {'elly_list': searched_list,}
+		return HttpResponse(template.render(context,request))
 
 def socialflow(request):
 	resource_owner_secret = request.session['resource_owner_secret']
@@ -189,21 +212,4 @@ def rts(request):
 		rts = rts.replace(".0m","m")
 		return HttpResponse(rts)
 
-#start of views related to searching and sorting 
-def filter (request):
-	if request.method == "GET":
-		filteredposts = request.GET.get('filter','')
-		filtered_list=Elly.objects.filter(section=filteredposts)
-		template = loader.get_template('elly/index.html')
-		context = {'elly_list': filtered_list,}
-		return HttpResponse(template.render(context,request))
 
-def search (request):
-	if request.method == "GET":
-		searchobject = request.GET.get('search','')
-		searched_list = Elly.objects.annotate(search=SearchVector('tags', 'title'),
-			).filter(search=searchobject)
-		print searched_list
-		template = loader.get_template('elly/index.html')
-		context = {'elly_list': searched_list,}
-		return HttpResponse(template.render(context,request))

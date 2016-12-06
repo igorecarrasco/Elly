@@ -400,10 +400,13 @@ i=0
 while i<len(novalista):
 	title=novalista[i][0]
 	tags=novalista[i][1]
-	pubdate=novalista[i][2]
-	if pubdate == None:
-		now = datetime.datetime.now()
-		pubdate=datetime.datetime.strftime(now,"%Y-%m-%dT%H-%M-%S")
+	timedate=novalista[i][2].replace("T", " ")
+	try:
+		timedate=datetime.datetime.strptime(timedate,"%Y-%m-%d %H:%M:%S")
+	except ValueError:
+		timedate=datetime.datetime.strptime(timedate,"%Y-%m-%d %H-%M-%S")
+	if timedate == None:
+		timedate = datetime.datetime.now()
 	link=novalista[i][3]
 	thumb=novalista[i][4]
 	author=novalista[i][5]
@@ -419,7 +422,7 @@ while i<len(novalista):
 	author = author.replace("’","'")
 	title = title.encode('utf_8')
 	title = title.replace("’","'")
-	cur.execute("INSERT INTO elly_elly (title, tags, pubdate, link, thumb, author, section, socialhed) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)",(title,tags,pubdate,link,thumb,author,section,socialhed))
+	cur.execute("INSERT INTO elly_elly (title, tags, pubdate, link, thumb, author, section, socialhed) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)",(title,tags,timedate,link,thumb,author,section,socialhed))
 	i=i+1
 
 cur.execute("DELETE FROM elly_elly WHERE id NOT IN (SELECT min(id) FROM elly_elly GROUP BY link)")
