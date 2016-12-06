@@ -49,26 +49,23 @@
 				<form action="/elly/index" method="get">
 					<div class="select-style">
 							<select name="limitposts">
-								<option value="" disabled selected hidden>Limit posts:</option>
+								<option value="" disabled selected hidden>Limit posts by number:</option>
 								<option value="10">10</option>
 								<option value="50">50</option>
 								<option value="100">100</option>
 								<option value="150">150</option>
 							</select>
 					</div>
-					<input type="submit" value="Limit Posts" id=limitbox>
-				</form>
-				<form action="/elly/index" method="get">
 					<div class="select-style">
 							<select name="limitdate">
-								<option value="" disabled selected hidden>Posts from last:</option>
+								<option value="" disabled selected hidden>Limit posts by time:</option>
 								<option value=7>Week</option>
 								<option value=30>Month</option>
 								<option value=90>3 Months</option>
 								<option value=365>12 Months</option>
 							</select>
 					</div>
-					<input type="submit" value="Limit Dates" id=datesbox>
+					<input type="submit" value="Limit" id=datesbox>
 				</form>
 			</div>
 		<ul>
