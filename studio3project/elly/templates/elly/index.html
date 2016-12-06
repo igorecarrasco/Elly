@@ -16,48 +16,61 @@
 		<div class=header>
 			<div id=ellylogo><a href= {% url 'index' %}><img width=70px src= {% static "elly/ellylogo.png" %}></img></a>
 			</div>
-			<!-- <div id=logotext>elly</div> -->
 			<div id=filtering>
-			<form action="/elly/index" method="get" id="filterform">
-			<div class="select-style">
-				<select name="filter">
-					<option value="" disabled selected hidden>Section</option>
-					<option value="Opinion">Opinion</option>
-					<option value="Business">Business</option>
-					<option value="Interactives">Interactives</option>
-					<option value="Politics">Politics</option>
-					<option value="Markets">Markets</option>
-					<option value="Tech">Tech</option>
-					<option value="US">US</option>
-					<option value="World">World</option>
-					<option value="Life">Life</option>
-					<option value="Page One">Page One</option>
-					<option value="Magazine">Magazine</option>
-					<option value="Arts">Arts</option>
-				</select>
-			</div>
-			<input type="submit" value="Filter" id=filterbox>
-			</form>
+				<form action="/elly/filter" method="get" id="filterform">
+				<div class="select-style">
+					<select name="filter">
+						<option value="" disabled selected hidden>Section</option>
+						<option value="Opinion">Opinion</option>
+						<option value="Business">Business</option>
+						<option value="Interactives">Interactives</option>
+						<option value="Politics">Politics</option>
+						<option value="Markets">Markets</option>
+						<option value="Tech">Tech</option>
+						<option value="US">US</option>
+						<option value="World">World</option>
+						<option value="Life">Life</option>
+						<option value="Page One">Page One</option>
+						<option value="Magazine">Magazine</option>
+						<option value="Arts">Arts</option>
+					</select>
+				</div>
+				<input type="submit" value="Filter" id=filterbox>
+				</form>
 
-			<form action="/elly/index" method="get">
-				<input type="text" name="search" size="25" placeholder="Enter tag or keyword" id="searchfield">
-				<input type="submit" value="Search" id=searchbox>
-			</form>
+				<form action="/elly/search" method="get">
+					<input type="text" name="search" size="25" placeholder="Enter tag or keyword" id="searchfield">
+					<input type="submit" value="Search" id=searchbox>
+				</form>
 			</div>
 		</div>
 		<div class="ellyboxcontainer">
-		<div class="select-style">
-			<form action="/elly/index" method="get">
-				<select name="limitposts">
-					<option value="" disabled selected hidden>Limit posts:</option>
-					<option value="10">10</option>
-					<option value="50">50</option>
-					<option value="100">100</option>
-					<option value="150">150</option>
-				</select>
-				</div>
-				<input type="submit" value="limitposts" id=filterbox>
-			</form>
+			<div class="limiting">
+				<form action="/elly/index" method="get">
+					<div class="select-style">
+							<select name="limitposts">
+								<option value="" disabled selected hidden>Limit posts:</option>
+								<option value="10">10</option>
+								<option value="50">50</option>
+								<option value="100">100</option>
+								<option value="150">150</option>
+							</select>
+					</div>
+					<input type="submit" value="Limit Posts" id=limitbox>
+				</form>
+				<form action="/elly/index" method="get">
+					<div class="select-style">
+							<select name="limitdate">
+								<option value="" disabled selected hidden>Posts from last:</option>
+								<option value=7>Week</option>
+								<option value=30>Month</option>
+								<option value=90>3 Months</option>
+								<option value=365>12 Months</option>
+							</select>
+					</div>
+					<input type="submit" value="Limit Dates" id=datesbox>
+				</form>
+			</div>
 		<ul>
 			{% if elly_list %}
 			<form action="/elly/postsocial" method="post" id=postsocial>

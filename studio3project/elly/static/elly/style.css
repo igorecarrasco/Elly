@@ -80,6 +80,13 @@ p {
 	margin:0 10px 0 10px;
 	display: inline-block;
 }
+.limiting {
+	height:37px;
+	padding-left:90px;
+}
+.limiting div {
+	display:inline-block;
+}
 .section {
 	margin:0;
 	-webkit-margin-before:0;
@@ -277,6 +284,29 @@ input[type='radio']{
 #searchbox:hover {
 	/*background: #c9c9c9;*/
 	text-decoration: none;
+}
+#limitbox{
+	-webkit-border-radius:1px;
+    -moz-border-radius:1px;
+    border-radius:1px;
+	border:none;
+	color: white;
+	padding: 4px 6px 4px 6px;
+	text-decoration: none;
+	background:#ccc;
+	color:#666;
+}
+
+#datesbox {
+	-webkit-border-radius:1px;
+    -moz-border-radius:1px;
+    border-radius:1px;
+	border:none;
+	color: white;
+	padding: 4px 6px 4px 6px;
+	text-decoration: none;
+	background:#ccc;
+	color:#666;
 }
 ::-webkit-input-placeholder {
 	font-style:italic;

@@ -90,6 +90,14 @@ def index(request):
 		elly_list = Elly.objects.order_by('-pubdate')[:limitposts]
 	except NameError:
 		elly_list = Elly.objects.order_by('-pubdate')
+	if limitposts == None:
+		try:
+			limitdates = request.GET.get('limitdate')
+			now = datetime.datetime.now()
+			initialdate = now - datetime.timedelta(days=int(limitdates))
+			elly_list = Elly.objects.filter(pubdate__range=(initialdate,now))
+		except TypeError:
+			elly_list = Elly.objects.order_by('-pubdate')
 	context = {'elly_list': elly_list,}
 	template = loader.get_template('elly/index.html')
 	return HttpResponse(template.render(context,request))
