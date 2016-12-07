@@ -183,7 +183,7 @@ def postsocial(request):
 			r = requests.get(urltwit,auth=headeroauth)
 	template = loader.get_template('elly/rssfeed.html')
 	context = {'listtitles':listtitles,}
-  	return HttpResponse(template.render(context,request))
+  	return HttpResponse(template.render(context,request)) 
 
 # Start of views related to loading analytics to the lister page
 def hits(request):
@@ -195,7 +195,6 @@ def hits(request):
 		hits = FormattedNumber(hits).format()
 		hits = hits.replace(".0k","k")
 		hits = hits.replace(".0m","m")
-
 		return HttpResponse(hits)
 
 def likes(request):
