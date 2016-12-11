@@ -30,10 +30,13 @@ var linkItems = $(".hits").length
 	$("input:radio").change(function(){
 	if ($(".optimizefield").is(":not(:checked)")) {
 		$('.reveal-if-active').hide();
+		$('.mustsendbox').hide();
 	} 
 
 	if ($(".optimizefield").is(":checked")) {
 		$('.reveal-if-active').show();
+		$('.mustsendbox').show();
+
 	}
 
 	if ($(".schedulefield").is(":not(:checked)")) {
@@ -171,6 +174,7 @@ $(window).one('load',(function(){
 				var accname = client_services[object].name
 				$("#socialselector").append("<option class=socialselector value='facebook_page,"+userserviceid+"'>Facebook: "+accname+"</option>")
 				$( ".optimizefield" ).hide();
+				$( ".mustsendbox").hide();
 			}
 			else if (accounts == "twitter"){
 				var screenname = client_services[object].screen_name;
@@ -180,7 +184,8 @@ $(window).one('load',(function(){
 				$("#socialselector").append("<option class=socialselector value='google_plus_page,"+userserviceid+"'>Google+</option>")
 			}
 			else if (accounts == "linked_in_page"){
-				$("#socialselector").append("<option class=socialselector value='linked_in_page,"+userserviceid+"'>LinkedIn</option>")
+				var accname = client_services[object].name
+				$("#socialselector").append("<option class=socialselector value='linked_in_page,"+userserviceid+"'>LinkedIn: "+accname+"</option>")
 			}			
 		}
 }
