@@ -169,7 +169,11 @@ def postsocial(request):
 			optimizeenddate = "&optimize_end_date="+enddate
 		elif schedtype == 'schedule':
 			scheddatetime = request.POST.get('scheduletime','')
-			scheduledt = "&scheduled_date="+scheddatetime
+			if scheddatetime == None:
+				urlcallback = request.build_absolute_uri(reverse('index'))
+				return HttpResponseRedirect(urlcallback)
+			else:		
+				scheduledt = "&scheduled_date="+scheddatetime
 		listtitles = []
 		for element in postids:
 			objetoelly = Elly.objects.get(id=element)
